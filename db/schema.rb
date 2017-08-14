@@ -10,9 +10,92 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20170814183558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "doctors", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "institutions", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitutde"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "treatments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "trial_id"
+    t.integer  "institution_id"
+    t.integer  "doctor_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["doctor_id"], name: "index_treatments_on_doctor_id", using: :btree
+    t.index ["institution_id"], name: "index_treatments_on_institution_id", using: :btree
+    t.index ["trial_id"], name: "index_treatments_on_trial_id", using: :btree
+    t.index ["user_id"], name: "index_treatments_on_user_id", using: :btree
+  end
+
+  create_table "trialdoctors", force: :cascade do |t|
+    t.integer  "trial_id"
+    t.integer  "doctor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_trialdoctors_on_doctor_id", using: :btree
+    t.index ["trial_id"], name: "index_trialdoctors_on_trial_id", using: :btree
+  end
+
+  create_table "trialinstitutions", force: :cascade do |t|
+    t.integer  "trial_id"
+    t.integer  "institution_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["institution_id"], name: "index_trialinstitutions_on_institution_id", using: :btree
+    t.index ["trial_id"], name: "index_trialinstitutions_on_trial_id", using: :btree
+  end
+
+  create_table "trials", force: :cascade do |t|
+    t.string   "title"
+    t.string   "condition"
+    t.text     "description"
+    t.text     "eligibility"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "location"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  add_foreign_key "treatments", "doctors"
+  add_foreign_key "treatments", "institutions"
+  add_foreign_key "treatments", "trials"
+  add_foreign_key "treatments", "users"
+  add_foreign_key "trialdoctors", "doctors"
+  add_foreign_key "trialdoctors", "trials"
+  add_foreign_key "trialinstitutions", "institutions"
+  add_foreign_key "trialinstitutions", "trials"
 end
