@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>TODO</title>
+    <title>ALENTO</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -11,5 +11,22 @@
   <body>
     <%= yield %>
     <%= javascript_include_tag 'application' %>
+    <%= yield(:js) %>
+    <% content_for(:js) do %>
+      $(document).ready(function() {
+        $("#carousel-example-generic").carousel();
+
+        // Enable Carousel Indicators
+        $(".item").click(function(){
+          $("#carousel-example-generic").carousel(1);
+        });
+
+        // Enable Carousel Controls
+        $(".left").click(function(){
+          $("#carousel-example-generic").carousel("prev");
+        });
+
+      });
+    <% end %>
   </body>
 </html>
