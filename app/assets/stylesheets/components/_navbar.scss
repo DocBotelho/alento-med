@@ -8,11 +8,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  h1{
+    float: right;
+    text-align: center;
+    color: white;
+    margin-top: 11px;
+    margin-left: 13px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 1);
+  }
 }
 
 /* Logo */
-.navbar-wagon-brand img {
-  height: 58px;
+.navbar-wagon-brand {
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 58px;
+  }
+
+
 }
 
 /* User Avatar */
@@ -31,7 +47,9 @@
 
 /* Basic navbar item */
 .navbar-wagon-item {
-  margin-right: 7109px;
+
+  flex: 0 0 0;
+  margin-right: 10px;
   margin-top: 25px;
 }
 
@@ -75,13 +93,7 @@
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
 }
-h1 {
-  font-size: 46px;
-  margin-top: -55px;
-  margin-left: 82.5px;
-  text-color: white;
-  font-weight: 500;
-  line-height: 1.1;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 1);
-}
+
+
+
+
