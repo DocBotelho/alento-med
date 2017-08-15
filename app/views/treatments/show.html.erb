@@ -1,2 +1,13 @@
+<br>
+<br>
+<br>
 <h1>Treatments#show</h1>
-<p>Find me in app/views/treatments/show.html.erb</p>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      var coord = <%= raw @treatment_coordinates.to_json %>;
+      alert('Treatment institution coordinates are ' + coord.lat + ', ' + coord.lng);
+    });
+  <% end %>
+<% end %>
