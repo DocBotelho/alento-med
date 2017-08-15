@@ -9,6 +9,12 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
   <body>
+<!-- added to render devise alerts from views/shared -->
+    <%= render 'shared/flashes' %>
+
+<!-- added to render le wagon navbar -->
+    <%= render 'shared/navbar' %>
+
     <%= yield %>
     <%= javascript_include_tag 'application' %>
     <%= yield(:js) %>
