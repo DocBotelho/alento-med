@@ -31,7 +31,7 @@
     <%= yield(:after_js) %>
 
 
-    <!-- Shouldn't we move this carousel into apllication_helper.rb? -->
+    <!-- Image carousel -->
     <% content_for(:js) do %>
       $(document).ready(function() {
         $("#carousel-example-generic").carousel();
@@ -45,7 +45,6 @@
         $(".left").click(function(){
           $("#carousel-example-generic").carousel("prev");
         });
-
       });
     <% end %>
   </body>
