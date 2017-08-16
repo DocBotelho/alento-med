@@ -33,9 +33,11 @@
 
 /* User Avatar */
 .navbar-wagon .avatar {
-  height: 35px;
-  width: 35px;
+  height: 60px;
+  width: 60px;
   border-radius: 50%;
+  z-index: 1;
+  position: relative;
 }
 
 /* Right section */
