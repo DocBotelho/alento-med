@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # Added to allow search through treatment model
+  has_many :treatments
+
   # Added automattically by devise for authentication
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,

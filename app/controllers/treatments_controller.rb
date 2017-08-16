@@ -2,6 +2,7 @@ class TreatmentsController < ApplicationController
   def index
     # Added for geocoding. MUST CHANGE @treatments to receive Treatment.where.not instead
     @treatments = Institution.where.not(latitude: nil, longitude: nil)
+    raise
 
     @hash = Gmaps4rails.build_markers(@treatments) do |treatment, marker|
       marker.lat treatment.latitude
