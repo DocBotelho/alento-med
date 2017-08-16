@@ -1,0 +1,48 @@
+
+
+.card-treatment {
+  .card-block{
+    background-color: white;
+  }
+  h4 {
+    font-size: 30px;
+    padding-left: 65px;
+    padding-top: 20px;
+  }
+  hr {
+    margin-top: 0px;
+    margin-bottom: 13px;
+    border-top: 1px solid #eef1f5;
+    width: 1024px;
+
+  }
+  .btn-default {
+    padding: 6px 12px;
+    font-size: 18px;
+    border-radius: 14px;
+    color: #333;
+    background-color: #eef1f5;
+    border-color: #ccc;
+    margin-right: 77px;
+    margin-top: 10px;
+  }
+  .card-title {
+    display: inline;
+  }
+  .title-button{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+  }
+  .row {
+    margin-left: 45px;
+    margin-right: 0;
+    margin-top: -54px;
+    margin-bottom: 10px;
+   }
+   p {
+    margin: -61px 0 0px;
+    padding: 59px;
+  }
+}
