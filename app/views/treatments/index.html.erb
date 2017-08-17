@@ -4,22 +4,29 @@
 
 
       <div class="row">
-        <div class="col-xs-12 col-md-4 col-lg-4">
-          <div class="card-index" style="width: 100%; height: 150px;">
-            <% @institutions.each do |institution| %>
-              <h4><%=institution.name%></h4>
-              <hr>
-              <div class="col-xs-10 col-lg-10">
-                <p><%=institution.address%></p>
+
+            <div class="col-xs-12 col-md-4 col-lg-4">
+                <%= paginate @institutions %>
+                <% @institutions.each do |institution| %>
+
+                  <div class="card-index" style="width: 100%; height: 150px;">
+
+                      <h4><%=institution.name%></h4>
+                      <hr>
+                      <div class="col-xs-10 col-lg-10">
+                        <p><%=institution.address%></p>
+                      </div>
+
+                    <button type="submit" class="btn btn-default">Pesquise</button>
+                  </div>
+                <% end %>
               </div>
-              <% end %>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </div>
-        </div>
+              <a href="#" class="previous round">&#8249;</a>
+              <a href="#" class="next round">&#8250;</a>
 
         <div class="col-xs-12 col-lg-8">
           <!-- Lines added for Geocoding -->
-          <div id="map" style="width: 100%; height: 1000px;">
+          <div id="map" style="width: 100%; height: 900px;">
 
             <% content_for(:after_js) do %>
               <%= javascript_tag do %>
