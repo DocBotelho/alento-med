@@ -30,6 +30,6 @@ class UserMailer < ApplicationMailer
   def contactstudy
     @greeting = "Hi"
 
-    mail to: (@study.email, subject = 'O usuário (SUBSTITUIR PELO NOME DA PESSOA) deseja participar do seu estudo: (NOME DO ESTUDO)'
+    mail to: (@study.email, subject = 'O usuário (SUBSTITUIR PELO NOME DA PESSOA) deseja participar do seu estudo: (NOME DO ESTUDO)')
   end
 end
