@@ -1,7 +1,15 @@
 class TreatmentsController < ApplicationController
+
+  def create
+    @treatment = Treatment.new(treatment_params)
+    @treatment.save!
+  end
+
+
   def index
     # Added to find locations where the medical condition informed on the search bar is treated
-    @trials = Trial.find_by(condition: params[:condition])
+    @condition = params[:condition]
+    @trials = Trial.find_by(condition: @condition)
     if @trials.nil?
       # Add message on screen "SORRY, NO TREATMENTS AVAILABLE AT THIS MOMENT TO THE CONDITION YOU SEARCHED"
       @institutions = []
@@ -23,7 +31,12 @@ class TreatmentsController < ApplicationController
     @institution = Institution.find(params[:id])
     # From this line on it should keep running after above-mentioned changes
     @institution_coordinates = { lat: @institution.latitude, lng: @institution.longitude }
-    # @alert_message = "You are viewing the Institution: #{@treatment.name}"
+  end
+
+  private
+
+  def treatment_params
+    params.require(:treatment).permit(:institution_id, :trial_id, :doctor_id, :user_id)
   end
 
 end
