@@ -15,15 +15,9 @@ class SyncerJob < ApplicationJob
       doctor = Doctor.find_or_create_by(name: f.doctor_name, email: f.contact_email, phone: f.contact_phone, contactname: f.contact_name, doctor_nct_id: f.doctor_nct_id)
       doctor.save
 
-      #+++++++++++++++++++++ WORKING HERE +++++++++++++++++++++++++++
-
-      #trialdoctor = Trialdoctor.new(trial_id: trial.id, doctor_id: doctor.id).where(trial.nct_id == doctor.doctor_nct_id)
-      #trialdoctor.save
-
-      #trialinstitution = Trialinstitution.new(trial_id: trial.id, institution_id: institution.id).where(trial.nct_id == institution.doctor_nct_id)
-      #trialinstitution.save
-
-
+      trial.doctors << doctor
+      trial.institutions << institution
+      trial.save
     end
   end
 end
