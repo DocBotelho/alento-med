@@ -4,7 +4,7 @@ class TreatmentsController < ApplicationController
     @trials = Trial.find_by(condition: params[:condition])
     if @trials.nil?
       # Add message on screen "SORRY, NO TREATMENTS AVAILABLE AT THIS MOMENT TO THE CONDITION YOU SEARCHED"
-      @institutions = ""
+      @institutions = []
     else
       @institutions = @trials.institutions
       # Added for geocoding. MUST CHANGE @treatments to receive Treatment.where.not instead
