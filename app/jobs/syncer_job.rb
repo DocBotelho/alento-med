@@ -16,9 +16,11 @@ class SyncerJob < ApplicationJob
 
       #+++++++++++++++++++++ WORKING HERE +++++++++++++++++++++++++++
 
-      # trialdoctor = Trialdoctor.new(trial_id: trial.id, doctor_id: doctor.id).where(trial.nct_id == doctor.doctor_nct_id)
+      #trialdoctor = Trialdoctor.new(trial_id: trial.id, doctor_id: doctor.id).where(trial.nct_id == doctor.doctor_nct_id)
+      #trialdoctor.save
 
-      # trialinstitution = Trialinstitution.new(trial_id: trial.id, institution_id: institution.id).where(trial.nct_id == institution.doctor_nct_id)
+      #trialinstitution = Trialinstitution.new(trial_id: trial.id, institution_id: institution.id).where(trial.nct_id == institution.doctor_nct_id)
+      #trialinstitution.save
 
     end
   end
