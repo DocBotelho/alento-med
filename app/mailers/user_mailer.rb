@@ -8,7 +8,7 @@ class UserMailer < ApplicationMailer
   def welcome
     @greeting = "olá"
 
-    mail to: (@user.email, subject: 'Bem vindo ao AlentoMed')
+    mail to: (@user.email, subject = 'Bem vindo ao AlentoMed')
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -19,7 +19,7 @@ class UserMailer < ApplicationMailer
   def contactuser
     @greeting = "Olá"
 
-    mail to: (@user.email, subject: 'Informações para prosseguir com o tratamento')
+    mail to: (@user.email, subject = 'Informações para prosseguir com o tratamento')
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -30,6 +30,6 @@ class UserMailer < ApplicationMailer
   def contactstudy
     @greeting = "Hi"
 
-    mail to: (@study.email, subject: 'O usuário (SUBSTITUIR PELO NOME DA PESSOA) deseja participar do seu estudo: (NOME DO ESTUDO)'
+    mail to: (@study.email, subject = 'O usuário (SUBSTITUIR PELO NOME DA PESSOA) deseja participar do seu estudo: (NOME DO ESTUDO)'
   end
 end
