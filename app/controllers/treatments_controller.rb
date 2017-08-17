@@ -1,9 +1,15 @@
 class TreatmentsController < ApplicationController
   def index
     # Added to find locations where the medical condition informed on the search bar is treated
-    @trials = Trial.find_by(condition: params[:condition]).institutions
-    # Added for geocoding. MUST CHANGE @treatments to receive Treatment.where.not instead
-    @treatments = @trials.where.not(latitude: nil, longitude: nil)
+    @trials = Trial.find_by(condition: params[:condition])
+    if @trials.nil?
+      # Add message on screen "SORRY, NO TREATMENTS AVAILABLE AT THIS MOMENT TO THE CONDITION YOU SEARCHED"
+      @institutions = ""
+    else
+      @institutions = @trials.institutions
+      # Added for geocoding. MUST CHANGE @treatments to receive Treatment.where.not instead
+      @treatments = @institutions.where.not(latitude: nil, longitude: nil)
+    end
 
     @hash = Gmaps4rails.build_markers(@treatments) do |treatment, marker|
       marker.lat treatment.latitude
