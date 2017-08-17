@@ -2,39 +2,28 @@ require 'json'
 require 'open-uri'
 
 10.times do
-  Institution.create!(
-    name: Faker::Address.community,
-    address: Faker::Address.street_address,
-    latitude: Faker::Address.latitude,
-    longitude: Faker::Address.longitude)
-end
-
-10.times do
-  Doctor.create!(
-    name: Faker::Name.unique.name,
-    phone: Faker::Company.duns_number,
-    email: Faker::Internet.free_email,)
-end
-
-10.times do
-  Trial.create!(
+  trial = Trial.new(
     title: Faker::Commerce.product_name,
     condition: Faker::Commerce.promotion_code,
     description: Faker::Lorem.sentences,
     eligibility: Faker::Lorem.words)
-end
+  trial.save
 
-10.times do
-  a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
-  Trialinstitution.create!(
-    trial_id: 1,
-    institution_id: a.sample)
-end
+  institution = Institution.new(
+    name: Faker::Address.community,
+    address: Faker::Address.street_address,
+    latitude: Faker::Address.latitude,
+    longitude: Faker::Address.longitude)
+  institution.save
 
-5.times do
-  a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
-  Trialdoctor.create!(
-  trial_id: 1,
-  doctor_id: a.sample)
+  doctor = Doctor.new(
+    name: Faker::Name.unique.name,
+    phone: Faker::Company.duns_number,
+    email: Faker::Internet.free_email,)
+  doctor.save
+
+  trial.institutions << Institution.last
+  trial.doctors << Doctor.last
+  trial.save
 end
 
