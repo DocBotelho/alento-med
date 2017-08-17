@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.3.3'
 
+gem 'kaminari'
+
 # gems added for geocoding
 gem 'geocoder'
 gem "coffee-rails"

@@ -8,7 +8,8 @@ class TreatmentsController < ApplicationController
     else
       @institutions = @trials.institutions
       # Added for geocoding. MUST CHANGE @treatments to receive Treatment.where.not instead
-      @institutions = @institutions.where.not(latitude: nil, longitude: nil)
+      @institutions = @institutions.where.not(latitude: nil, longitude: nil).page(params[:page])
+
     end
 
     @hash = Gmaps4rails.build_markers(@institutions) do |institution, marker|
