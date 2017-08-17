@@ -1,16 +1,16 @@
 <div class="treatment-index">
   <div class="wraper">
     <div class="card-global">
-    
-      
-      <div class="row">     
+
+
+      <div class="row">
         <div class="col-xs-12 col-md-4 col-lg-4">
           <div class="card-index" style="width: 100%; height: 150px;">
-            <%= @treatments.each do |trial| %>
-              <h4><%=treatment.trial.title%></h4>
+            <%= @institutions.each do |institution| %>
+              <h4><%=institution.name%></h4>
               <hr>
               <div class="col-xs-10 col-lg-10">
-                <p><%=treatment.institution.name%>, <%=treatment.institution.adress%></p>
+                <p><%=institution.address%></p>
               </div>
               <% end %>
             <button type="submit" class="btn btn-default">Submit</button>
@@ -20,7 +20,7 @@
         <div class="col-xs-12 col-lg-8">
           <!-- Lines added for Geocoding -->
           <div id="map" style="width: 100%; height: 1000px;">
-          
+
             <% content_for(:after_js) do %>
               <%= javascript_tag do %>
                 $(document).ready(function() {
@@ -37,11 +37,11 @@
                   });
                 });
               <% end %>
-            <% end %>      
+            <% end %>
           </div>
         </div>
       </div>
-   
+
     </div>
  </div>
 </div>

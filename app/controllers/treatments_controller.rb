@@ -8,21 +8,21 @@ class TreatmentsController < ApplicationController
     else
       @institutions = @trials.institutions
       # Added for geocoding. MUST CHANGE @treatments to receive Treatment.where.not instead
-      @treatments = @institutions.where.not(latitude: nil, longitude: nil)
+      @institutions = @institutions.where.not(latitude: nil, longitude: nil)
     end
 
-    @hash = Gmaps4rails.build_markers(@treatments) do |treatment, marker|
-      marker.lat treatment.latitude
-      marker.lng treatment.longitude
+    @hash = Gmaps4rails.build_markers(@institutions) do |institution, marker|
+      marker.lat institution.latitude
+      marker.lng institution.longitude
       # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
   end
 
   def show
     # Added for geocoding. MUST CHANGE @treatment to receive Treatment.find instead
-    @treatment = Institution.find(params[:id])
+    @institution = Institution.find(params[:id])
     # From this line on it should keep running after above-mentioned changes
-    @treatment_coordinates = { lat: @treatment.latitude, lng: @treatment.longitude }
+    @institution_coordinates = { lat: @institution.latitude, lng: @institution.longitude }
     # @alert_message = "You are viewing the Institution: #{@treatment.name}"
   end
 
