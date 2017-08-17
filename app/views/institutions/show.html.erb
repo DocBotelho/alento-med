@@ -1,0 +1,38 @@
+<br>
+<div class="container">
+
+  <div class="row">
+    <div class="card col-xl-12">
+      <h2 class="text-center"><%= @trial.title %></h2>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="card col-xl-12">
+      <h2 class="text-center"><%= "SHOW @institution STATIC MAP" %></h2>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="card col-xl-12 col-lg-8">
+      <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
+      <p><%= @trial.description %></p>
+      <a><%= "Informações detalhadas (EN): @trial.url" %></a>
+    </div>
+    <div class="card col-xl-12 col-lg-4">
+      <h4><strong><%= "Médico Responsável:" %></strong></h4>
+      <p><%= @trial.doctors.first.name %></p>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="card col-xl-12 col-lg-8">
+      <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
+      <p><%= "@trial.eligibility" %></p>
+    </div>
+    <div class="card col-xl-12 col-lg-4">
+      <h4><%= "ADD ENROLLMENT BUTTON" %></h4>
+    </div>
+  </div>
+
+</div>
