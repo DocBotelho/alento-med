@@ -24,8 +24,8 @@ class InstitutionsController < ApplicationController
   end
 
   def show
-    # @institution = Institution.find(params[:id])
-    @trial = Trial.find(1)
+    @institution = Institution.find(params[:id])
+    @trial = @institution.trials.first
     # @trial.doctor = Doctor.find(1)
   end
 end
