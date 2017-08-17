@@ -24,3 +24,17 @@ end
     eligibility: Faker::Lorem.words)
 end
 
+10.times do
+  a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+  Trialinstitution.create!(
+    trial_id: 1,
+    institution_id: a.sample)
+end
+
+5.times do
+  a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+  Trialdoctor.create!(
+  trial_id: 1,
+  doctor_id: a.sample)
+end
+
