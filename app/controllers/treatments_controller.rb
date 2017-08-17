@@ -5,7 +5,6 @@ class TreatmentsController < ApplicationController
     @treatment.save!
   end
 
-
   def index
     #MOVED TO INSTITUTION CONTROLLER By DocBotelho
   end
