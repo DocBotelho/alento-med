@@ -27,12 +27,21 @@
                 <!-- code added to avoid showing repeated info -->
               <% end %>
             <% else %>
-              <div class="card-index" style="width: 100%;">
-                <h4 class="text-center">
-                 <strong>Pedimos desculpas!</strong>
-                </h4>
-                 <p><%= "Não encontramos estudos clínicos no Brasil que esteja recrutando pacientes para a \"#{@condition}\" no momento" %></p>
-              </div>
+              <% if @condition == "" %>
+                <div class="card-index" style="width: 100%;">
+                  <h4 class="text-center">
+                   <strong>Pedimos desculpas!</strong>
+                  </h4>
+                   <p><%= "Informe a condição clínica na barra de busca acima" %></p>
+                </div>
+              <% else %>
+                <div class="card-index" style="width: 100%;">
+                  <h4 class="text-center">
+                   <strong>Pedimos desculpas!</strong>
+                  </h4>
+                   <p><%= "Não encontramos estudos clínicos no Brasil que esteja recrutando pacientes para a \"#{@condition}\" no momento" %></p>
+                </div>
+              <% end %>
             <% end %>
         </div>
 
