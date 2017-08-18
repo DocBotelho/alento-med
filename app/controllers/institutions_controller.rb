@@ -8,7 +8,6 @@ class InstitutionsController < ApplicationController
     @condition = @condition.join(" ")
     @trials = Trial.find_by(condition: @condition)
     if @trials.nil?
-      # Add message on screen "SORRY, NO TREATMENTS AVAILABLE AT THIS MOMENT TO THE CONDITION YOU SEARCHED"
       @institutions = []
     else
       @institutions = @trials.institutions
