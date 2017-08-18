@@ -17,11 +17,17 @@
     <div class="card col-xl-12 col-lg-8">
       <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
       <p><%= @trial.description %></p>
-      <%= link_to "Informações detalhadas em Inglês", "#{@trial.link}" %>
+      <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "#{@trial.link}" %>
     </div>
     <div class="card col-xl-12 col-lg-4">
-      <h4><strong><%= "Médico Responsável:" %></strong></h4>
-      <p><%= @trial.doctors.first.name %></p>
+      <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
+      <% @trial.doctors.each do |doctor| %>
+      <p><%= doctor.name %></p>
+      <% end %>
+      <br>
+      <div class="card col-xl-12 col-lg-4">
+        <%= button_to "Quero candidatar", "modal-to-send", method: :get, class: "btn btn-danger" %>
+      </div>
     </div>
   </div>
   <br>
@@ -29,9 +35,6 @@
     <div class="card col-xl-12 col-lg-8">
       <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
       <p><%= @trial.eligibility %></p>
-    </div>
-    <div class="card col-xl-12 col-lg-4">
-      <%= button_to "Quero candidatar", "modal-to-send", method: :get, class: "btn btn-danger" %>
     </div>
   </div>
 
