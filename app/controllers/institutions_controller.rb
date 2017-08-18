@@ -3,20 +3,20 @@ class InstitutionsController < ApplicationController
     # Added to find locations where the medical condition informed on the search bar is treated
     @condition = []
     upcase_words
-    @condition = @condition.join(" ")
-    @trials = Trial.find_by(condition: @condition)
+    @trials = Trial.where(condition: @condition)
     if @trials.nil?
       @institutions = []
     else
-      @institutions = @trials.institutions
-      # Added for geocoding. MUST CHANGE @treatments to receive Treatment.where.not instead
-      @institutions = @institutions.where.not(latitude: nil, longitude: nil).page(params[:page])
+      @trials.each do |trial|
+        @institutions = trial.institutions
+        # Added for geocoding. MUST CHANGE @treatments to receive Treatment.where.not instead
+        @institutions = @institutions.where.not(latitude: nil, longitude: nil).page(params[:page])
+      end
     end
 
     @hash = Gmaps4rails.build_markers(@institutions) do |institution, marker|
       marker.lat institution.latitude
       marker.lng institution.longitude
-      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
   end
 
@@ -31,6 +31,7 @@ private
     params[:condition].downcase.split.each do |word|
       @condition << word.capitalize
     end
+    @condition = @condition.join(" ")
   end
 
 end
