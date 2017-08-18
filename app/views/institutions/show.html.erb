@@ -9,7 +9,7 @@
   <br>
   <div class="row">
     <div class="card col-xl-12">
-      <h2 class="text-center"><%= "SHOW @institution STATIC MAP" %></h2>
+      <h2 class="text-center"><%= @institution.address %></h2>
     </div>
   </div>
   <br>
@@ -17,7 +17,7 @@
     <div class="card col-xl-12 col-lg-8">
       <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
       <p><%= @trial.description %></p>
-      <a><%= "Informações detalhadas (EN): @trial.url" %></a>
+      <%= link_to "Informações detalhadas em Inglês", "#{@trial.link}" %>
     </div>
     <div class="card col-xl-12 col-lg-4">
       <h4><strong><%= "Médico Responsável:" %></strong></h4>
@@ -28,10 +28,10 @@
   <div class="row">
     <div class="card col-xl-12 col-lg-8">
       <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
-      <p><%= "@trial.eligibility" %></p>
+      <p><%= @trial.eligibility %></p>
     </div>
     <div class="card col-xl-12 col-lg-4">
-      <h4><%= "ADD ENROLLMENT BUTTON" %></h4>
+      <%= button_to "Quero candidatar", "modal-to-send", method: :get, class: "btn btn-danger" %>
     </div>
   </div>
 

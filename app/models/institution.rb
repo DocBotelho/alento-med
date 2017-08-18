@@ -2,9 +2,9 @@ class Institution < ApplicationRecord
   # Added to allow search through treatment model
   has_many :treatments
   # Added to allow combined search through trialinstitution model
-  has_many :trialistitutions
+  has_many :trialinstitutions
   # Added to allow combined search through trialinstitution model
-  has_many :trials, through: :trialistitutions
+  has_many :trials, through: :trialinstitutions
   # Added for geocoding
   geocoded_by :address
   after_validation :geocode, if: :address_changed?

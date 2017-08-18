@@ -2,19 +2,47 @@
   <div class="wraper">
     <div class="card-global">
 
-
       <div class="row">
         <div class="col-xs-12 col-md-4 col-lg-4">
-          <div class="card-index" style="width: 100%; height: 150px;">
-            <% @institutions.each do |institution| %>
-              <h4><%=institution.name%></h4>
-              <hr>
-              <div class="col-xs-10 col-lg-10">
-                <p><%=institution.address%></p>
-              </div>
+
+            <% if @institutions.size > 0 %>
+              <%= paginate @institutions %>
+              <% @institutions.each do |institution| %>
+                <!-- code added to avoid showing repeated info -->
+                <% if @check != institution %>
+                <!-- code added to avoid showing repeated info -->
+                  <div class="card-index" style="width: 100%;">
+                    <h4><%=institution.name%></h4>
+                    <hr>
+                    <div class="col-xs-12 col-lg-9">
+                      <p><%=institution.address%></p>
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                      <%= button_to "Conheça", institution_path(institution), method: :get, class: "btn btn-primary" %>
+                    </div>
+                  '</div>
+                <% end %>
+                <!-- code added to avoid showing repeated info -->
+                <% @check = institution %>
+                <!-- code added to avoid showing repeated info -->
               <% end %>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </div>
+            <% else %>
+              <% if @condition == "" %>
+                <div class="card-index" style="width: 100%;">
+                  <h4 class="text-center">
+                   <strong>Pedimos desculpas!</strong>
+                  </h4>
+                   <p><%= "Informe a condição clínica na barra de busca acima" %></p>
+                </div>
+              <% else %>
+                <div class="card-index" style="width: 100%;">
+                  <h4 class="text-center">
+                   <strong>Pedimos desculpas!</strong>
+                  </h4>
+                   <p><%= "Não encontramos estudos clínicos no Brasil que esteja recrutando pacientes para a \"#{@condition}\" no momento" %></p>
+                </div>
+              <% end %>
+            <% end %>
         </div>
 
         <div class="col-xs-12 col-lg-8">
