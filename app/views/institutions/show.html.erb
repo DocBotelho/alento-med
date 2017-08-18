@@ -2,39 +2,74 @@
 <div class="container">
 
   <div class="row">
-    <div class="card col-xl-12">
-      <h2 class="text-center"><%= @trial.title %></h2>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="card col-xl-12">
-      <h2 class="text-center"><%= @institution.address %></h2>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="card col-xl-12 col-lg-8">
-      <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
-      <p><%= @trial.description %></p>
-      <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "#{@trial.link}", target: "_blank" %>
-    </div>
-    <div class="card col-xl-12 col-lg-4">
-      <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
-      <% @trial.doctors.each do |doctor| %>
-      <p><%= doctor.name %></p>
-      <% end %>
-      <br>
-      <div class="card col-xl-12 col-lg-4">
+    <div class="col-xl-12">
+      <div class="card text-center">
+        <h2><%= @trial.title %></h2>
+        <br>
+        <!-- button to show alert on screen -->
         <%= button_to "Quero candidatar", "modal-to-send", method: :get, class: "btn btn-danger" %>
+        <br>
       </div>
     </div>
   </div>
   <br>
   <div class="row">
-    <div class="card col-xl-12 col-lg-8">
-      <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
-      <p><%= @trial.eligibility %></p>
+    <div class="col-xl-12 col-lg-8">
+      <div class="card" id="title">
+        <h3 class="text-center"><%= @institution.address. gsub(', ,',', ') %></h3>
+      </div>
+    </div>
+    <div class="col-xl-12 col-lg-4">
+      <div class="card">
+
+        <!-- beggining of map -->
+        <div id="map" style="height:150px"></div>
+        <!-- Gmaps js: building the map -->
+          <% content_for(:after_js) do %>
+            <%= javascript_tag do %>
+              $(document).ready(function() {
+                <!-- Create a map object and specify the DOM element for display -->
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  center: {lat: <%= @institution.latitude %>, lng: <%= @institution.longitude %>},
+                  scrollwheel: false,
+                  zoom: 10
+                });
+              })
+            <% end %>
+          <% end %>
+        <!-- end of map -->
+
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xl-12 col-lg-8">
+      <div class="card">
+        <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
+        <p><%= @trial.description %></p>
+        <div class="text-center">
+          <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "#{@trial.link}", target: "_blank" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-12 col-lg-4">
+      <div class="card text-center">
+        <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
+        <% @trial.doctors.each do |doctor| %>
+        <p><%= doctor.name %></p>
+        <% end %>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
+        <p><%= @trial.eligibility %></p>
+      </div>
     </div>
   </div>
 
