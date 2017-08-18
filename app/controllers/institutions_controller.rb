@@ -2,9 +2,7 @@ class InstitutionsController < ApplicationController
   def index
     # Added to find locations where the medical condition informed on the search bar is treated
     @condition = []
-    params[:condition].downcase.split.each do |word|
-      @condition << word.capitalize
-    end
+    upcase_words
     @condition = @condition.join(" ")
     @trials = Trial.find_by(condition: @condition)
     if @trials.nil?
@@ -25,6 +23,14 @@ class InstitutionsController < ApplicationController
   def show
     @institution = Institution.find(params[:id])
     @trial = @institution.trials.first
-    # @trial.doctor = Doctor.find(1)
   end
+
+private
+
+  def upcase_words
+    params[:condition].downcase.split.each do |word|
+      @condition << word.capitalize
+    end
+  end
+
 end
