@@ -49,7 +49,7 @@
         <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
         <p><%= @trial.description %></p>
         <div class="text-center">
-          <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "#{@trial.link}", target: "_blank" %>
+          <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "https://www.clinicaltrials.gov/ct2/show/#{@trial_nct_id}", target: "_blank" %>
         </div>
       </div>
     </div>
