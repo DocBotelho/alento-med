@@ -17,7 +17,7 @@
     <div class="card col-xl-12 col-lg-8">
       <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
       <p><%= @trial.description %></p>
-      <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "#{@trial.link}" %>
+      <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "#{@trial.link}", target: "_blank" %>
     </div>
     <div class="card col-xl-12 col-lg-4">
       <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
