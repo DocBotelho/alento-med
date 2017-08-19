@@ -24,7 +24,8 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.contactuser.subject
   #
-  def contactuser
+  def contactuser(user)
+    @user = user
     @greeting = "Olá #{@user.name},"
     @briefintro = "Obrigado pelo seu interesse em utilizar nossa plataforma para participar do tratamento: #{@trial.title}."
     @intro = "Nós enviamos as seguintes informações de contato para a instituição responsável pelo estudo cientifico que conduzirá o tratamento: Nome: #{@user.name}, Email: #{@user.email} e Telefone: #{@user.phone}. A partir de agora, você pode aguardar o contato da instituição para prosseguir com os procedimentos. Se houver algum erro nos seus dados fornecidos, por favor corrija as informações em seu cadastro clicando na sua foto de perfil no canto superior direito e em seguida editar cadastro. Após isso, candidate-se no estudo novamente ou entre em contato através das informações abaixo."
@@ -38,7 +39,7 @@ class UserMailer < ApplicationMailer
     @ending = "Agradecemos a sua visita e lhe desejamos muita saúde."
     @att = "Atenciosamente,"
     @alentoteam = "Equipe AlentoMed"
-    mail to: (@user.email, subject = "Informações sobre o tratamento: #{@trial.title}")
+    mail(to: @user.email, subject: "Informações sobre o tratamento: #{@trial.title}")
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -46,9 +47,19 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.contactstudy.subject
   #
-  def contactstudy
+  def contactstudy(contact)
+    @user = user
     @greeting = "Olá #{@trialdoctors.name}"
+    @briefintro = "Nós somos a AlentoMed. Uma plataforma que visa conectar usuários com tratamentos conduzidos por pesquisas clinicas. Você pode checar nossa plataforma através do site: www.alentomed.com.br."
+    @intro = "Um usuário utilizou a nossa plataforma para expressar que tem interesse em participar do seu estudo cientifico #{@trial.name} com identificador #{@trial.nct_id}. Abaixo constam as informações do usuário para que possa ser dado prosseguimento nas etapas de aceitação do paciente. Enviamos também um email para o usuário com as seguintes informações de contato: email: #{@trialdoctors.email}, telefone: #{@trialdoctors.phone}. Seguem as informções do usuário abaixo:"
+    @username = "Nome: #{@user.name}"
+    @useremail = "Email do usuário: #{@user.email}"
+    @userphone = "Telefone p/ contato: #{@user.phone}"
+    @disclaimer = "Todas as nossas informações são obtidas através do banco de dados do site clinicaltrials.gov , caso haja alguma inconsistência nas iformações por favor entre em contato através do email contato@alentomed.com.br ou entre em contato com a equipe Clinical Trials."
+    @ending = "Agradecemos a sua visita e lhe desejamos muita saúde."
+    @att = "Atenciosamente,"
+    @alentoteam = "Equipe AlentoMed"
 
-    mail to: (@trialdoctors.email, subject = "O usuário #{@user.name} deseja participar do seu estudo: #{@trial.title}, Identificador: #{@trial.trial_nct_id}")
+    mail(to: @trialdoctors.email, subject: "O usuário #{@user.name} deseja participar do seu estudo: #{@trial.title}, Identificador: #{@trial.trial_nct_id}")
   end
 end
