@@ -7,9 +7,25 @@
         <h2><%= @trial.title %></h2>
         <br>
         <!-- button to show alert on screen -->
-        <%= button_to "Quero candidatar", "modal-to-send", method: :get, class: "btn btn-danger" %>
-        <br>
+        <button data-toggle="modal" data-target="#awareness" class="btn btn-danger">Quero Candidatar</button>
+        <!-- Awareness Alert Modal -->
+        <div class="modal fade text-center" id="awareness">
+          <h4>MENSAGEM DE ALENTO</h4>
+          <p>
+            Pesquisas clínicas são reguladas pela ANVISA. Por meio delas, são oferecidos ao paciente tratamentos gratuitos com medicamentos em fase experimental.
+
+            Nossa plataforma busca trazer um ALENTO às pessoas em busca de tratamentos médicos, porém não podemos garantir a efetividade desses tratamentos, que são de responsabilidade da equipe médica que conduz o estudo.
+
+            Ao clicar em QUERO CANDIDATAR, você autoriza que seus dados de contato sejam enviados para à equipe médica responsável.
+          </p>
+          <ul class="list-inline">
+            <li><%= image_tag "unchecked_checkbox.png", class: "checkbox" %></li>
+            <li><h4><strong>Estou ciente</strong></h4></li>
+          </ul>
+          <%= button_to "Quero Candidatar", treatment_path, method: :get, class: "btn btn-danger" %>
+        </div>
       </div>
+      <br>
     </div>
   </div>
   <br>
