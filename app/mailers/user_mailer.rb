@@ -31,7 +31,7 @@ class UserMailer < ApplicationMailer
     @intro = "Nós enviamos as seguintes informações de contato para a instituição responsável pelo estudo cientifico que conduzirá o tratamento: Nome: #{@user.name}, Email: #{@user.email} e Telefone: #{@user.phone}. A partir de agora, você pode aguardar o contato da instituição para prosseguir com os procedimentos. Se houver algum erro nos seus dados fornecidos, por favor corrija as informações em seu cadastro clicando na sua foto de perfil no canto superior direito e em seguida editar cadastro. Após isso, candidate-se no estudo novamente ou entre em contato através das informações abaixo."
     @institutionname = "Nome da instituição: #{@institution.name}"
     @institutionaddress = "Endereço: #{@institution.address}"
-    @medic = " Médicos(as) responsáveis: #{@trialdoctors.name}"
+    @medics = " Médicos(as) responsáveis: #{@trialdoctors.name}"
     @contactemail = "Email(s) para contato: #{@trialdoctors.email}"
     @contactphone = "Número de telefone para contato: #{@trialdoctors.phone}"
     @nctindentifier = "Identificador NCT: #{@trial.trial_nct_id}"
