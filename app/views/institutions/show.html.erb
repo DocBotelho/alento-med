@@ -21,8 +21,21 @@
             <li><%= image_tag "unchecked_checkbox.png", class: "checkbox" %></li>
             <li><h4><strong>Estou ciente</strong></h4></li>
           </ul>
-          <%= button_to "Quero Candidatar", treatment_path, method: :get, class: "btn btn-danger" %>
+          <button data-toggle="modal" data-target="#email_sender" class="btn btn-danger">Quero Candidatar</button>
         </div>
+
+        <!-- Email Modal -->
+        <div class="modal fade text-center" id="email_sender">
+          <h4>Pronto! Verifique seu email.</h4>
+          <p>
+            Os médicos responsáveis pela pesquisa foram comunicados de sua candidatura ao tratamento.
+            Em breve, você será contactado para dar prosseguimento ao processo de recrutamento.
+
+            Caso deseje, você também pode se antecipar e entrar em contato com a instituição por meio das informações que lhe enviamos por email. Boa sorte!
+          </p>
+          <%= button_to "Voltar", institution_path(@institution), method: :get, class: "btn btn-primary" %>
+        </div>
+
       </div>
       <br>
     </div>
