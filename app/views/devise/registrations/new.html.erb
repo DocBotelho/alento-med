@@ -15,11 +15,16 @@
           <%= f.input :password_confirmation, label: "Digite a senha novamente:", required: true %>
         </div>
         <div class="form-actions">
-          <%= f.button :submit, "Criar conta", class: 'btn-primary' %>
+          <%= f.button :submit, "Criar conta", class: 'btn btn-primary btn-block' %>
         </div>
       </div>
     </div>
   </div>
 <% end %>
 
-<div class="text-center"><%= render "devise/shared/links" %></div>
+<div class="text-center"><%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= link_to "Entrar com #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: 'fa fa-facebook btn btn-primary' %><br />
+  <% end -%>
+<% end -%>
+</div>
