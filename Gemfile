@@ -25,6 +25,7 @@ gem 'redis'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
+gem 'bootstrap-social-rails'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
 gem 'sass-rails'
@@ -32,6 +33,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'sidekiq'
 gem 'sidekiq-failures', github: 'mhfs/sidekiq-failures'
+
 
 #gems for development coppied from project medshare
 group :development do
