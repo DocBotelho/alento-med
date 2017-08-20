@@ -2,6 +2,8 @@ class User < ApplicationRecord
   # Added to allow search through treatment model
   has_many :treatments
 
+  after_create :send_welcome_email
+
   # Added automattically by devise for authentication
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -25,6 +27,10 @@ class User < ApplicationRecord
       user = User.new(user_params)
       user.password = Devise.friendly_token[0,20]  # Fake password for validation
       user.save
+    end
+
+    def send_welcome_email
+      UserMailer.welcome(self).deliver_now
     end
 
     return user
