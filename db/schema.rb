@@ -10,19 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170817013839) do
+ActiveRecord::Schema.define(version: 20170821174558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "doctors", force: :cascade do |t|
     t.string   "name"
-    t.string   "email"
-    t.string   "phone"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.string   "contactname"
     t.string   "doctor_nct_id"
+    t.string   "facility_id"
+    t.string   "role"
   end
 
   create_table "fetchdbs", force: :cascade do |t|
@@ -30,14 +29,25 @@ ActiveRecord::Schema.define(version: 20170817013839) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "institutiondoctors", force: :cascade do |t|
+    t.integer  "institution_id"
+    t.integer  "doctor_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["doctor_id"], name: "index_institutiondoctors_on_doctor_id", using: :btree
+    t.index ["institution_id"], name: "index_institutiondoctors_on_institution_id", using: :btree
+  end
+
   create_table "institutions", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "institution_nct_id"
+    t.string   "institutioncontacts"
+    t.string   "facility_id"
   end
 
   create_table "treatments", force: :cascade do |t|
@@ -76,10 +86,11 @@ ActiveRecord::Schema.define(version: 20170817013839) do
     t.string   "condition"
     t.text     "description"
     t.text     "eligibility"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "link"
     t.string   "trial_nct_id"
+    t.string   "centralcontacts"
   end
 
   create_table "users", force: :cascade do |t|
@@ -109,6 +120,8 @@ ActiveRecord::Schema.define(version: 20170817013839) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "institutiondoctors", "doctors"
+  add_foreign_key "institutiondoctors", "institutions"
   add_foreign_key "treatments", "doctors"
   add_foreign_key "treatments", "institutions"
   add_foreign_key "treatments", "trials"
