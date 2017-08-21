@@ -9,13 +9,43 @@
   align-items: center;
   justify-content: space-between;
 
-  h1{
+  .btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border-radius: 8px;
+}
+
+  .form-control {
+    height: 32px;
+    padding: 6px 12px;
+    font-size: 18px;
+    line-height: 1.428571429;
+    color: #000000;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  }
+
+  h3{
     float: right;
     text-align: center;
     color: white;
     margin-top: 11px;
     margin-left: 13px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 1);
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 1);
   }
 }
 
@@ -25,7 +55,7 @@
   align-items: center;
 
   img {
-    height: 58px;
+    height: 45px;
   }
 
 
@@ -33,11 +63,9 @@
 
 /* User Avatar */
 .navbar-wagon .avatar {
-  height: 60px;
-  width: 60px;
+  height: 45px;
   border-radius: 50%;
   z-index: 1;
-  position: relative;
 }
 
 /* Right section */
@@ -47,22 +75,26 @@
   justify-content: space-between;
 }
 
+.nav-bar-login {
+  padding: 5px;
+  opacity: 0.5;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-bar-login:hover {
+  opacity: 1;
+  color: white;
+  text-decoration: none;
+}
+
+
 /* Basic navbar item */
 .navbar-wagon-item {
 
   flex: 0 0 0;
   margin-right: 10px;
   margin-top: 25px;
-}
-
-/* Navbar link */
-.navbar-wagon-link {
-  color: #616668;
-  font-size: 14px;
-}
-.navbar-wagon-link:hover {
-  color: #da552f;
-  text-decoration: none;
 }
 
 /* Dropdown menu */
@@ -81,7 +113,7 @@
 }
 .navbar-wagon-dropdown-menu li > a:hover {
   background: transparent !important;
-  color: black !important;
+  color: white !important;
 }
 .navbar-wagon-dropdown-menu:before {
   content: ' ';
