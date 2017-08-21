@@ -6,14 +6,14 @@ class Syncer
         ON browse_conditions.nct_id = studies.nct_id
       INNER JOIN eligibilities
         ON eligibilities.nct_id = studies.nct_id
-      LEFT OUTER JOIN design_groups
+      INNER JOIN design_groups
         ON design_groups.nct_id = studies.nct_id
-      LEFT OUTER JOIN central_contacts
+      INNER JOIN central_contacts
         ON central_contacts.nct_id = studies.nct_id
-      LEFT OUTER JOIN facility_investigators
-        ON facility_investigators.nct_id = studies.nct_id
-      LEFT OUTER JOIN facility_contacts
-        ON facility_contacts.nct_id = studies.nct_id"
+      INNER JOIN facility_investigators
+        ON facility_investigators.facility_id = facilities.id
+      INNER JOIN facility_contacts
+        ON facility_contacts.facility_id = facilities.id"
 
   WHERE = "
     facilities.country = 'Brazil' AND
@@ -82,8 +82,8 @@ class Syncer
         trial.save
       end
       #A trial can also have many central contacts. Do the same thing that happens with condition here
-      unless trial.centralcontacts.include?({name: f.central_contacts_name, email: f.central_contacts_email, phone: f.central_contacts_phone})
-        trial.centralcontacts << {name: f.central_contacts_name, email: f.central_contacts_email, phone: f.central_contacts_phone}
+      unless trial.centralcontacts.include?({name: f.central_contact_name, email: f.central_contact_email, phone: f.central_contact_phone})
+        trial.centralcontacts << {name: f.central_contact_name, email: f.central_contact_email, phone: f.central_contact_phone}
         trial.save
       end
       #Create a trial with these params if there isn't one in the database
@@ -92,7 +92,7 @@ class Syncer
       trial.description = f.brief_description
       trial.eligibility = [f.gender, f.minimum_age, f.maximum_age].join(", ")
       trial.condition = f.condition_name
-      trial.centralcontacts = [{name: f.central_contacts_name, email: f.central_contacts_email, phone: f.central_contacts_email}]
+      trial.centralcontacts = [{name: f.central_contact_name, email: f.central_contact_email, phone: f.central_contact_email}]
       trial.save
     end
 
@@ -117,14 +117,16 @@ class Syncer
   def save_doctor(f)
     doctor = Doctor.find_or_initialize_by(investigatorid: f.facility_investigators_id)
     doctor.name = f.facility_investigators_name
+    doctor.save
+    doctor
   end
 
   def update_institution(institution, f)
     #An institution can have many contacts. Insert the new one if it's not present
 
     contact = build_facility_contact(f)
-    if institution.centralcontacts.include?(contact)
-      institution.centralcontacts << contact
+    unless institution.institutioncontacts.include?(contact)
+      institution.institutioncontacts << contact
     end
   end
 

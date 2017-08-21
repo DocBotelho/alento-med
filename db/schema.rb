@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170821194105) do
+ActiveRecord::Schema.define(version: 20170821195415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20170821194105) do
     t.datetime "updated_at",     null: false
     t.string   "doctor_nct_id"
     t.string   "facility_id"
-    t.string   "role"
     t.string   "investigatorid"
+    t.string   "crm"
   end
 
   create_table "fetchdbs", force: :cascade do |t|
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20170821194105) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.string   "institution_nct_id"
-    t.string   "institutioncontacts"
+    t.json     "institutioncontacts"
     t.string   "facility_id"
   end
 
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20170821194105) do
     t.datetime "updated_at",      null: false
     t.string   "link"
     t.string   "trial_nct_id"
-    t.string   "centralcontacts"
+    t.json     "centralcontacts"
   end
 
   create_table "users", force: :cascade do |t|

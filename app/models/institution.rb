@@ -6,6 +6,7 @@ class Institution < ApplicationRecord
   # Added to allow combined search through trialinstitution model
   has_many :trials, through: :trialinstitutions
   # Added to allow combined search through institutiondoctor model
+  has_many :institutiondoctors
   has_many :doctors, through: :institutiondoctors
   # Added for geocoding
   #geocoded_by :address
