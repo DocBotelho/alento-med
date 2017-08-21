@@ -8,8 +8,8 @@ class Institution < ApplicationRecord
   # Added to allow combined search through institutiondoctor model
   has_many :doctors, through: :institutiondoctors
   # Added for geocoding
-  geocoded_by :address
-  after_validation :geocode, if: :address_changed?
+  #geocoded_by :address
+  #after_validation :geocode, if: :address_changed?
 
   paginates_per 5
 end
