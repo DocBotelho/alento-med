@@ -6,17 +6,18 @@ class Syncer
         ON browse_conditions.nct_id = studies.nct_id
       INNER JOIN eligibilities
         ON eligibilities.nct_id = studies.nct_id
-      INNER JOIN design_groups
+      LEFT OUTER JOIN design_groups
         ON design_groups.nct_id = studies.nct_id
-      INNER JOIN central_contacts
+      LEFT OUTER JOIN central_contacts
         ON central_contacts.nct_id = studies.nct_id
-      INNER JOIN facility_investigators
+      LEFT OUTER JOIN facility_investigators
         ON facility_investigators.facility_id = facilities.id
-      INNER JOIN facility_contacts
+      LEFT OUTER JOIN facility_contacts
         ON facility_contacts.facility_id = facilities.id"
 
   WHERE = "
     facilities.country = 'Brazil' AND
+    overall_status = 'Recruiting' AND
     facilities.status = 'Recruiting' AND
     study_type = 'Interventional'"
 
@@ -77,13 +78,13 @@ class Syncer
     trial = Trial.find_or_initialize_by(trial_nct_id: f.study_nct_id)
     #A trial can treat many conditions. Add a condition if the nct_id is present but the condition is different.
     if trial.persisted?
-      if trial.condition != f.condition_name
-        trial.condition += ", " + f.condition_name
+      unless trial.condition.include?(f.condition_name)
+        trial.condition << f.condition_name
         trial.save
       end
       #A trial can also have many central contacts. Do the same thing that happens with condition here
-      unless trial.centralcontacts.include?({name: f.central_contact_name, email: f.central_contact_email, phone: f.central_contact_phone})
-        trial.centralcontacts << {name: f.central_contact_name, email: f.central_contact_email, phone: f.central_contact_phone}
+      unless trial.centralcontacts.include?({'name' => f.central_contact_name, 'email' => f.central_contact_email, 'phone' => f.central_contact_phone})
+        trial.centralcontacts << {'name' => f.central_contact_name, 'email' => f.central_contact_email, 'phone' => f.central_contact_phone}
         trial.save
       end
       #Create a trial with these params if there isn't one in the database
@@ -91,7 +92,7 @@ class Syncer
       trial.title = f.brief_title
       trial.description = f.brief_description
       trial.eligibility = [f.gender, f.minimum_age, f.maximum_age].join(", ")
-      trial.condition = f.condition_name
+      trial.condition = [f.condition_name]
       trial.centralcontacts = [{name: f.central_contact_name, email: f.central_contact_email, phone: f.central_contact_email}]
       trial.save
     end
@@ -115,9 +116,7 @@ class Syncer
   end
 
   def save_doctor(f)
-    doctor = Doctor.find_or_initialize_by(investigatorid: f.facility_investigators_id)
-    doctor.name = f.facility_investigators_name
-    doctor.save
+    doctor = Doctor.find_or_create_by(investigatorid: f.facility_investigators_id, name: f.facility_investigators_name)
     doctor
   end
 
@@ -131,6 +130,7 @@ class Syncer
   end
 
   def create_institution(institution, f)
+    institution.institution_nct_id = f.institution_nct_id
     institution.facility_id = f.facility_id
     institution.institutioncontacts = [build_facility_contact(f)]
     institution.address = [f.facility_name, f.facility_city, f.facility_state, f.facility_country, f.facility_zip].join(", ")
@@ -138,9 +138,11 @@ class Syncer
 
   def build_facility_contact(f)
     {
-      name: f.facility_contacts_name,
-      email: f.facility_contacts_email,
-      phone: f.facility_contacts_phone
+      'name' => f.facility_contacts_name,
+      'email' => f.facility_contacts_email,
+      'phone' => f.facility_contacts_phone
     }
   end
 end
+
+Study.joins("NATURAL JOIN facilities").where("facilities.country = 'Brazil' AND overall_status = 'Recruiting' AND study_type = 'Interventional'").select("Distinct studies.nct_id")
