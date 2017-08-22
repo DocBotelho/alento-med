@@ -12,5 +12,7 @@ class Institution < ApplicationRecord
   geocoded_by :address
   #after_validation :geocode, if: :address_changed?
 
+  validates_uniqueness_of :facility_id
+
   paginates_per 5
 end
