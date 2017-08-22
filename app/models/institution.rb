@@ -9,7 +9,7 @@ class Institution < ApplicationRecord
   has_many :institutiondoctors
   has_many :doctors, through: :institutiondoctors
   # Added for geocoding
-  #geocoded_by :address
+  geocoded_by :address
   #after_validation :geocode, if: :address_changed?
 
   paginates_per 5
