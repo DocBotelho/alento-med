@@ -1,3 +1,4 @@
+<!-- Awareness Alert Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="awareness">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -18,86 +19,89 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
         <%= button_to "Estou Ciente", treatments_path, method: :get, class: "btn btn-primary" %>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
+    </div>
+  </div>
+</div>
 
 
 <div class="container">
+  <div class="card-treatment">
 
-  <div class="row">
-    <div class="col-xl-12 col-md-12 col-lg-12">
-      <div class="card text-center">
-        <h2><%= @trial.title %></h2>
-        <br>
-        <!-- button to show alert on screen -->
-        <button data-toggle="modal" data-target="#awareness" class="btn btn-danger">Quero Candidatar</button>
-        <!-- Awareness Alert Modal -->
-        <div class="container col-xl-12 col-md-6 col-lg-6 col-md-offset-6">
+    <div class="row">
+      <div class="line-one"></div>
+        <div>
+          <h3><%= @trial.title %></h3>
         </div>
+          <br>
+          <!-- button to show alert on screen -->
+          <div>
+          <button data-toggle="modal" data-target="#awareness" class="btn btn-danger">Quero Candidatar</button>
+          </div>
 
-
-  <br>
-  <div class="row">
-    <div class="col-xl-12 col-lg-8">
-      <div class="card" id="title">
-        <h3 class="text-center"><%= @institution.address. gsub(', ,',', ') %></h3>
-      </div>
+      <hr>
     </div>
-    <div class="col-xl-12 col-lg-4">
-      <div class="card">
 
-        <!-- beggining of map -->
-        <div id="map" style="height:150px"></div>
-        <!-- Gmaps js: building the map -->
-          <% content_for(:after_js) do %>
-            <%= javascript_tag do %>
-              $(document).ready(function() {
-                <!-- Create a map object and specify the DOM element for display -->
-                var map = new google.maps.Map(document.getElementById('map'), {
-                  center: {lat: <%= @institution.latitude %>, lng: <%= @institution.longitude %>},
-                  scrollwheel: false,
-                  zoom: 10
-                });
-              })
+    <br>
+
+    <div class="row">
+      <div class="col-xl-12 col-lg-8">
+        <div id="title">
+          <h4 class="text-center"><%= @institution.address. gsub(', ,',', ') %></h4>
+        </div>
+      </div>
+      <div class="col-xl-12 col-lg-4">
+        <div >
+
+          <!-- beggining of map -->
+          <div id="map" style="height:150px"></div>
+          <!-- Gmaps js: building the map -->
+            <% content_for(:after_js) do %>
+              <%= javascript_tag do %>
+                $(document).ready(function() {
+                  <!-- Create a map object and specify the DOM element for display -->
+                  var map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: <%= @institution.latitude %>, lng: <%= @institution.longitude %>},
+                    scrollwheel: false,
+                    zoom: 10
+                  });
+                })
+              <% end %>
             <% end %>
-          <% end %>
-        <!-- end of map -->
+          <!-- end of map -->
 
-      </div>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-xl-12 col-lg-8">
-      <div class="card">
-        <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
-        <p><%= @trial.description %></p>
-        <div class="text-center">
-          <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "https://www.clinicaltrials.gov/ct2/show/#{@trial.trial_nct_id}", target: "_blank" %>
         </div>
       </div>
     </div>
-
-    <div class="col-xl-12 col-lg-4">
-      <div class="card text-center">
-        <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
-        <% @trial.doctors.each do |doctor| %>
-        <p><%= doctor.name %></p>
-        <% end %>
+    <br>
+    <div class="row">
+      <div class="col-xl-12 col-lg-8">
+        <div>
+          <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
+          <p><%= @trial.description %></p>
+          <div class="text-center">
+            <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "https://www.clinicaltrials.gov/ct2/show/#{@trial.trial_nct_id}", target: "_blank" %>
+          </div>
+        </div>
       </div>
-      <br>
+
+      <div class="col-xl-12 col-lg-4">
+        <div>
+          <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
+          <% @trial.doctors.each do |doctor| %>
+          <p><%= doctor.name %></p>
+          <% end %>
+        </div>
+        <br>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-xl-12">
+        <div>
+          <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
+          <p><%= @trial.eligibility %></p>
+        </div>
+      </div>
     </div>
   </div>
-  <br>
-  <div class="row">
-    <div class="col-xl-12">
-      <div class="card">
-        <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
-        <p><%= @trial.eligibility %></p>
-      </div>
-    </div>
-  </div>
-
 </div>
