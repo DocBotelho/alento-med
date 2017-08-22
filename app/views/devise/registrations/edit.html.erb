@@ -1,27 +1,34 @@
-<h2 class="text-center">Editar cadastro</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
 <div class="container container-table">
   <div class="row vertical-center-row">
-    <div class="col-md-4 col-md-offset-4 bg-info">
+    <div class="col-md-4 col-md-offset-4 bg-info edit_email">
       <div class="form-inputs">
-        <%= f.input :email, required: true, autofocus: true, label: "Email:" %>
+        <%= f.input :email, required: true, autofocus: true, label: false, placeholder: "Email:" %>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
         <% end %>
 
-        <%= f.input :password, autocomplete: "off", hint: "Deixe este espaço em branco se não quiser alterar a senha.", required: false, label: "Senha:" %>
-        <%= f.input :password_confirmation, required: false, label: "Confirme a nova senha:" %>
-        <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true, label: "Senha atual:" %>
+        <%= f.input :password, autocomplete: "off", hint: "Deixe este espaço em branco se não quiser alterar a senha.", required: false, label: false, placeholder: "Senha:" %>
+        <%= f.input :password_confirmation, required: false, label: false, placeholder: "Confirme a nova senha:" %>
+        <%= f.input :current_password, hint: " Coloque sua senha atual para confirmar as mudanças.", required: true, label: false, placeholder: "Senha atual:" %>
       </div>
-      <div class="form-action">
-        <%= f.button :submit, "Atualizar", class:"btn btn-primary" %>
-        <%= link_to "Voltar", root_path, class:"btn btn-primary" %>
-        <%= link_to "Deletar cadastro", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger" %>
-      </div>
+
+        <div class="form-action">
+          <div>
+            <%= f.button :submit, "Atualizar", class:"btn btn-primary" %>
+          </div>
+          <div>
+            <%= link_to "Voltar", root_path, class:"btn btn-primary" %>
+          </div>
+          <div>
+            <%= link_to "Deletar cadastro", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger" %>
+          </div>
+        </div>
+
     </div>
   </div>
 <br>
