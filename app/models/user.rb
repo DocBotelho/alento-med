@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Added to allow search through treatment model
   has_many :treatments
 
-  after_create :send_welcome_email
+  # after_create :send_welcome_email
 
   # Added automattically by devise for authentication
   devise :database_authenticatable, :registerable, :confirmable,
