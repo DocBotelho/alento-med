@@ -9,4 +9,6 @@ class Trial < ApplicationRecord
   has_many :trialdoctors, dependent: :destroy
   # Added to allow combined search through trialdoctor model
   has_many :doctors, through: :trialdoctors, dependent: :destroy
+
+  validates_uniqueness_of :trial_nct_id
 end
