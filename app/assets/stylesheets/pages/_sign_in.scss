@@ -1,0 +1,53 @@
+.sign_in {
+  margin-top: 20px;
+  .form-group.email.user_email {
+    margin-top: 15px;
+  }
+  background-color: white;
+
+  // padding: 10px;
+  .form-actions {
+    input {
+      // margin: 5px;
+    }
+
+    .card {
+    padding: 15px 2px 2px 2px;
+    border-radius: 5px;
+    margin-left: 230px;
+    margin-right: 230px;
+    }
+  }
+  .row {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  .btn-xs, .btn-group-xs > .btn {
+    padding: 8px 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+  .form-control{
+    text-align: center;
+
+  }
+
+}
+
+.check-remember {
+  .checkbox {
+    width: 200px;
+    height: 1px;
+  }
+}
+.form-sing_in {
+  h3 {
+  color: white;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 1);
+    // margin: 5px;
+  }
+}

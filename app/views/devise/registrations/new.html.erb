@@ -1,50 +1,50 @@
-<h2 class="text-center">Preencha o formulário para criar sua conta</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
 
   <div class="container container-table">
     <div class="row vertical-center-row">
-      <div class="col-md-6 col-md-offset-3 bg-info">
+      <div class="col-md-6 col-md-offset-3 bg-info registration">
         <div class="row">
-          <div class="col-md-12">
-            <%= f.input :name, label: "Nome completo:", required: true %>
+          <div class=" col-md-12">
+            <%= f.input :name, placeholder: "Nome completo:", label: false, required: true %>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <%= f.input :location, label: "Endereço:", required: false %>
+            <%= f.input :location, placeholder: "Endereço:", label: false, required: false %>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <%= f.input :email, label: "Email:", required: true, autofocus: true %>
+            <%= f.input :email, placeholder: "Email:", label: false, required: true, autofocus: true %>
           </div>
           <div class="col-md-6">
-            <%= f.input :phone, label: "Telefone para contato:", required: false %>
+            <%= f.input :phone, placeholder: "Telefone para contato:", label: false, required: false %>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <%= f.input :password, label: "Senha:", required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+            <%= f.input :password, placeholder: "Senha:", label: false, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
           </div>
           <div class="col-md-6">
-            <%= f.input :password_confirmation, label: "Digite a senha novamente:", required: true %>
+            <%= f.input :password_confirmation, placeholder: "Digite a senha novamente:", label: false, required: true %>
           </div>
         </div>
           <div class="form-actions">
             <%= f.button :submit, "Criar conta", class: 'btn btn-primary btn-xl' %>
           </div>
+          <% end %>
+          <div class="text-center"><%- if devise_mapping.omniauthable? %>
+            <%- resource_class.omniauth_providers.each do |provider| %>
+            <%= link_to "Entrar com #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: 'btn btn-primary btn-xs' %><br />
+            <% end -%>
+          <% end -%>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
 
-<div class="text-center"><%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Entrar com #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: 'fa fa-facebook btn btn-primary btn-xs' %><br />
-  <% end -%>
-<% end -%>
+
+
 <br>
 </div>
