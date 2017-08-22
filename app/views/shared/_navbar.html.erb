@@ -6,15 +6,14 @@
           <%= image_tag "esteto.png" %>
         <% end %>
       </div>
-      <h1>Alento</h1>
+      <h3>Alento</h3>
     </div>
     <div class="form-inline hidden-xs hidden-sm">
 
       <%= form_tag(institutions_path, :method => "get", id: "search-form") do %>
         <%= text_field_tag :condition, params[:condition], placeholder: "sua condição clínica", class:"form-control"%>
 
-        <!-- FIELD "seu endereço" removed for pre-demoday presentation -->
-        <!-- find it inside ReadME -->
+      <%= text_field_tag :location, params[:location], placeholder: "endereço(NOT IN USE YET)", class:"form-control"%>
 
         <%= submit_tag "Pesquisar", class: "btn btn-primary" %>
       <% end %>
@@ -25,7 +24,7 @@
       <% if user_signed_in? %>
 
         <!-- Avatar showed when user is logged in + dropdown menu -->
-        <div class="navbar-wagon-item">
+        <!-- <div class="navbar-wagon-item"> -->
           <div class="dropdown">
             <%= image_tag user_picture, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
             <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
@@ -46,11 +45,11 @@
               </li>
             </ul>
           </div>
-        </div>
+        <!-- </div> -->
       <% else %>
         <!-- Login link (when logged out) -->
-        <%= link_to t(".sign_in", default: "Entre"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link btn btn-primary btn-lg" %>
-        <%= link_to t(".sign_up", default: "Cadastre-se"), new_user_registration_path, class: "navbar-wagon-item navbar-wagon-link btn btn-primary btn-lg" %>
+        <%= link_to t(".sign_in", default: "Entre"), new_user_session_path, class: "nav-bar-login" %>
+        <%= link_to t(".sign_up", default: "Cadastre-se"), new_user_registration_path, class: "nav-bar-login" %>
       <% end %>
     </div>
 

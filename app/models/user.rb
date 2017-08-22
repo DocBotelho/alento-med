@@ -5,7 +5,7 @@ class User < ApplicationRecord
   after_create :send_welcome_email
 
   # Added automattically by devise for authentication
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          # Added for facebook omniauth authentication
          :omniauthable, omniauth_providers: [:facebook]
@@ -29,10 +29,10 @@ class User < ApplicationRecord
       user.save
     end
 
-    def send_welcome_email
-      UserMailer.welcome(self).deliver_now
-    end
-
     return user
+  end
+
+  def send_welcome_email
+    UserMailer.welcome(self).deliver_now
   end
 end

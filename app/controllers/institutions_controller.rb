@@ -1,4 +1,5 @@
 class InstitutionsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     # Added to find locations where the medical condition informed on the search bar is treated
     @condition = []
