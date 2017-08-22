@@ -4,24 +4,29 @@
 
       <div class="row">
         <div class="col-xs-12 col-md-4 col-lg-4">
-          <% if @institutions.nil? %>
+          <% if @institutions.size == 0 %>
             <% if @condition == "" %>
               <div class="card-index" style="width: 100%;">
                 <h4 class="text-center">
                  <strong>Pedimos desculpas!</strong>
                 </h4>
-                <p><%= "Informe a condição clínica na barra de busca acima" %></p>
+                <p><%= "Por favor, informe sua condição clínica na barra de busca no topo da página" %></p>
               </div>
             <% else %>
               <div class="card-index" style="width: 100%;">
                 <h4 class="text-center">
                  <strong>Pedimos desculpas!</strong>
                 </h4>
-                   <p><%= "Não encontramos estudos clínicos no Brasil que esteja recrutando pacientes para a \"#{@condition}\" no momento" %></p>
+                   <p><%= "ALENTO não encontrou estudos clínicos no Brasil que esteja recrutando pacientes para a \"#{@condition.downcase}\" no momento" %></p>
               </div>
             <% end %>
+
           <% else %>
-            <%= paginate @institutions %>
+
+            <!-- removed paginate @institutions inside ruby brackets -->
+
+            <h4>ALENTO encontrou <strong><%= "#{@institutions.size}" %></strong> centros clínicos que oferecem tratamento para <%= "#{@condition.downcase}" %></h4>
+
             <% @institutions.each do |institution| %>
               <!-- code added to avoid showing repeated info -->
               <% if @check != institution %>
@@ -30,10 +35,11 @@
                   <h4><%=institution.name%></h4>
                   <hr>
                   <div class="col-xs-12 col-lg-9">
-                    <p><%=institution.address%></p>
+                    <p><%=institution.address.gsub(", ,", ", ") %></p>
                   </div>
                   <div class="col-xs-12 col-lg-3">
-                    <%= button_to "Conheça", institution_path(institution), method: :get, class: "btn btn-primary" %>
+                    <%= link_to "Conheça", institution_path(institution, condition: @condition), class: "btn btn-primary" %>
+
                   </div>
                 '</div>
               <% end %>
@@ -41,12 +47,14 @@
               <% @check = institution %>
               <!-- code added to avoid showing repeated info -->
             <% end %>
+
           <% end %>
+
         </div>
 
         <div class="col-xs-12 col-lg-8">
           <!-- Lines added for Geocoding -->
-          <div id="map" style="width: 100%; height: 1000px;">
+          <div id="map" style="width: 100%; height: 550px;">
 
             <% content_for(:after_js) do %>
               <%= javascript_tag do %>

@@ -27,17 +27,14 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-xl-12 col-md-12 col-lg-12">
+    <div class="col-xl-12">
       <div class="card text-center">
-        <h2><%= @trial.title %></h2>
-        <br>
-        <!-- button to show alert on screen -->
-        <button data-toggle="modal" data-target="#awareness" class="btn btn-danger">Quero Candidatar</button>
-        <!-- Awareness Alert Modal -->
-        <div class="container col-xl-12 col-md-6 col-lg-6 col-md-offset-6">
-        </div>
-
-
+        <h2><%= @institution.name %></h2>
+        <h4>Estão disponíveis <strong><%= "#{@trials.size}" %></strong> tratamentos para <%= "#{@condition.downcase}" %>
+        </h4>
+      </div>
+    </div>
+  </div>
   <br>
   <div class="row">
     <div class="col-xl-12 col-lg-8">
@@ -47,9 +44,9 @@
     </div>
     <div class="col-xl-12 col-lg-4">
       <div class="card">
-
         <!-- beggining of map -->
-        <div id="map" style="height:150px"></div>
+        <div id="map" style="height:150px">
+        </div>
         <!-- Gmaps js: building the map -->
           <% content_for(:after_js) do %>
             <%= javascript_tag do %>
@@ -64,40 +61,56 @@
             <% end %>
           <% end %>
         <!-- end of map -->
-
       </div>
     </div>
   </div>
-  <br>
-  <div class="row">
-    <div class="col-xl-12 col-lg-8">
-      <div class="card">
-        <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
-        <p><%= @trial.description %></p>
-        <div class="text-center">
-          <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "https://www.clinicaltrials.gov/ct2/show/#{@trial.trial_nct_id}", target: "_blank" %>
+
+  <% @trials.each_with_index do |trial, index| %>
+
+    <hr>
+    <div class="row">
+      <div class="col-xl-12 col-md-12 col-lg-12">
+        <div class="card text-center">
+          <h4><strong>Pesquisa Clínica #<%= index + 1%></strong></h4>
+          <h2><%= trial.title %></h2>
+          <br>
+          <!-- button to show alert on screen -->
+          <button data-toggle="modal" data-target="#awareness" class="btn btn-danger">Quero Candidatar</button>
         </div>
       </div>
     </div>
-
-    <div class="col-xl-12 col-lg-4">
-      <div class="card text-center">
-        <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
-        <% @trial.doctors.each do |doctor| %>
-        <p><%= doctor.name %></p>
-        <% end %>
-      </div>
-      <br>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-xl-12">
-      <div class="card">
-        <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
-        <p><%= @trial.eligibility %></p>
+    <br>
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card">
+          <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
+          <p><%= trial.description %></p>
+          <div class="text-center">
+            <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "https://www.clinicaltrials.gov/ct2/show/#{trial.trial_nct_id}", target: "_blank" %>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+    <br>
+    <div class="row">
+      <div class="col-xl-12 col-lg-8">
+        <div class="card">
+          <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
+          <p><%= trial.eligibility %></p>
+        </div>
+      </div>
 
+      <div class="col-xl-12 col-lg-4">
+        <div class="card text-center">
+          <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
+          <% trial.doctors.each do |doctor| %>
+          <p><%= doctor.name %></p>
+          <% end %>
+        </div>
+        <br>
+      </div>
+    </div>
+    <hr>
+
+  <% end %>
 </div>

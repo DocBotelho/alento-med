@@ -1,19 +1,13 @@
 class InstitutionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+
   def index
-    # Added to find locations where the medical condition informed on the search bar is treated
-    @condition = []
-    upcase_words
-    @trials = Trial.where(condition: @condition)
-    if @trials.nil?
-      @institutions = []
-    else
-      @trials.each do |trial|
-        @institutions = trial.institutions
-        # Added for geocoding. MUST CHANGE @treatments to receive Treatment.where.not instead
-        @institutions = @institutions.where.not(latitude: nil, longitude: nil).page(params[:page])
-      end
-    end
+    @condition = params[:condition]
+
+    # review line to fix search by distance from user_location
+    @institutions = Institution.joins(:trials).where('trials.condition @@ ?', "#{@condition}").where.not(latitude: nil, longitude: nil).distinct
+
+    # .page(params[:page])
 
     @hash = Gmaps4rails.build_markers(@institutions) do |institution, marker|
       marker.lat institution.latitude
@@ -23,16 +17,14 @@ class InstitutionsController < ApplicationController
 
   def show
     @institution = Institution.find(params[:id])
-    @trial = @institution.trials.first
+    @condition = params[:condition]
+    @trials = @institution.trials.where('condition @@ ?', "#{@condition}")
   end
 
-private
+  private
 
-  def upcase_words
-    params[:condition].downcase.split.each do |word|
-      @condition << word.capitalize
-    end
-    @condition = @condition.join(" ")
+  def user_location
+    return request.location unless Rails.env.development?
+    Struct.new(:latitude, :longitude).new(23.5611818, -46.6892361)
   end
-
 end
