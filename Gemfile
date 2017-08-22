@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.3.3'
 
+#gem added for email controller postmark
+gem 'postmark-rails'
+
 gem 'kaminari'
 
 # gems added for geocoding
