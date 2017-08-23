@@ -23,7 +23,7 @@
 
           <% else %>
 
-            removed paginate @institutions inside ruby brackets
+
             <div class="title-card">
               <% if @institutions.size == 1 %>
                 <h4>ALENTO encontrou <strong>1</strong> centro clínico que oferece tratamento para "<%= @condition.downcase %>"</h4>
@@ -36,12 +36,12 @@
             <% @institutions.each do |institution| %>
             <!-- #Jos31, please verify if this line should be moved inside the div -->
 
-              <div class="card-index">
+              <div class="card-index col-xs-12 col-lg-4">
               <!-- #Jos31, please verify why the card is breaking -->
 
                 <h5><strong><%=institution.name%></strong></h5>
 
-                <div class="col-xs-12 col-lg-9">
+                <div class="">
                   <% @institution_conditions = [] %>
                   <% institution.trials.search_by_condition(@condition).each do |trial| %>
                     <% trial.condition.each do |condition| %>
@@ -51,7 +51,7 @@
                   <p>oferece tratamento para: <%= @institution_conditions.join(", ") %></p>
                 </div>
 
-                <div class="col-xs-12 col-lg-3">
+                <div class="">
                   <%= link_to "Conheça", institution_path(institution, condition: @condition), class: "btn btn-primary" %>
                 </div>
 
@@ -64,7 +64,7 @@
 
         <div class="col-xs-12 col-lg-8">
           <!-- Lines added for Geocoding -->
-          <div id="map" style="width: 100%; height: 1100px;">
+          <div id="map" style="width: 100%; height: 500px;">
 
             <% content_for(:after_js) do %>
               <%= javascript_tag do %>
