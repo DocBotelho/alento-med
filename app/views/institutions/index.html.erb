@@ -39,6 +39,7 @@
               <!-- #Jos31, please verify why the card is breaking -->
 
                 <h5><strong><%=institution.name%></strong></h5>
+                <hr>
 
                 <div class="">
                   <% @institution_conditions = [] %>
@@ -63,7 +64,7 @@
 
         <div class="col-xs-12 col-lg-8">
           <!-- Lines added for Geocoding -->
-          <div id="map" style="width: 100%; height: 500px;">
+          <div id="map" style="width: 100%; height: 800px;">
 
             <% content_for(:after_js) do %>
               <%= javascript_tag do %>
