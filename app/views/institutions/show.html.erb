@@ -29,93 +29,87 @@
 
 
 
-<div class="container">
+<div class="container treatment-card">
 
-  <div class="row">
-    <div class="col-xl-12">
-      <div class="card text-center">
-        <h2><%= @institution.name %></h2>
-        <h4>Estão disponíveis <strong><%= "#{@trials.size}" %></strong> tratamentos para <%= "#{@condition.downcase}" %>
-        </h4>
-      </div>
+
+  <div class="">
+    <div class="card-intitution-name">
+      <h2><%= @institution.name %></h2>
+      <h4>Estão disponíveis <strong><%= "#{@trials.size}" %></strong> tratamentos para <%= "#{@condition.downcase}" %>
+      </h4>
     </div>
   </div>
-  <br>
-  <div class="row">
-    <div class="col-xl-12 col-lg-8">
-      <div class="card" id="title">
-        <h3 class="text-center"><%= @institution.address. gsub(', ,',', ') %></h3>
-      </div>
-    </div>
-    <div class="col-xl-12 col-lg-4">
-      <div class="card">
-        <!-- beggining of map -->
-        <div id="map" style="height:150px">
-        </div>
-        <!-- Gmaps js: building the map -->
-          <% content_for(:after_js) do %>
-            <%= javascript_tag do %>
-              $(document).ready(function() {
-                <!-- Create a map object and specify the DOM element for display -->
-                var map = new google.maps.Map(document.getElementById('map'), {
-                  center: {lat: <%= @institution.latitude %>, lng: <%= @institution.longitude %>},
-                  scrollwheel: false,
-                  zoom: 10
-                });
-              })
+
+  <div class="">
+    <div class="row">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <!-- beggining of map -->
+          <div id="map" style="height:300px">
+          </div>
+          <!-- Gmaps js: building the map -->
+            <% content_for(:after_js) do %>
+              <%= javascript_tag do %>
+                $(document).ready(function() {
+                  <!-- Create a map object and specify the DOM element for display -->
+                  var map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: <%= @institution.latitude %>, lng: <%= @institution.longitude %>},
+                    scrollwheel: false,
+                    zoom: 10
+                  });
+                })
+              <% end %>
             <% end %>
-          <% end %>
-        <!-- end of map -->
+          <!-- end of map -->
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div id="title">
+          <h4 class="text-center"><%= @institution.address. gsub(', ,',', ') %></h4>
+        </div>
       </div>
     </div>
   </div>
 
   <% @trials.each_with_index do |trial, index| %>
+    <div class="card">
+      <div class="row">
+        <div class="title-research">
 
-    <hr>
-    <div class="row">
-      <div class="col-xl-12 col-md-12 col-lg-12">
-        <div class="card text-center">
-          <h4><strong>Pesquisa Clínica #<%= index + 1%></strong></h4>
-          <h2><%= trial.title %></h2>
-          <br>
+          <h3><strong>Nº<%= index + 1%></strong></h3>
+          <h3><%= trial.title %></h3>
           <!-- button to show alert on screen -->
-          <button data-toggle="modal" data-target="#awareness" class="btn btn-danger">Quero Candidatar</button>
+          <button data-toggle="modal" data-target="#awareness" class="btn btn-primary">Quero Candidatar</button>
         </div>
       </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-xl-12">
-        <div class="card">
-          <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
-          <p><%= trial.description %></p>
-          <div class="text-center">
+      <hr>
+        <div class="text-center col-xs-12 col-md-6 col-md-offset-6">
             <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "https://www.clinicaltrials.gov/ct2/show/#{trial.trial_nct_id}", target: "_blank" %>
           </div>
+
+        <div class="">
+          <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
+          <p><%= trial.description %></p>
+
         </div>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-xl-12 col-lg-8">
-        <div class="card">
+
+        <div class="">
           <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
           <p><%= trial.eligibility %></p>
         </div>
-      </div>
 
-      <div class="col-xl-12 col-lg-4">
-        <div class="card text-center">
+        <div class="">
           <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
+          <% @array = [] %>
           <% trial.doctors.each do |doctor| %>
-          <p><%= doctor.name %></p>
+          <% @array << doctor.name %>
           <% end %>
+          <p><%= @array.join ", " %></p>
+
         </div>
-        <br>
-      </div>
+
+
     </div>
-    <hr>
 
   <% end %>
 </div>
