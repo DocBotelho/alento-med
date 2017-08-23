@@ -15,4 +15,10 @@ class Institution < ApplicationRecord
   validates_uniqueness_of :facility_id
 
   paginates_per 5
+
+  include PgSearch
+  pg_search_scope :condition_search, :associated_against => {
+    :trials => :condition
+  }
+
 end
