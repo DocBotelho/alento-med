@@ -25,11 +25,6 @@ ActiveRecord::Schema.define(version: 20170822023454) do
     t.string   "crm"
   end
 
-  create_table "fetchdbs", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "institutiondoctors", force: :cascade do |t|
     t.integer  "institution_id"
     t.integer  "doctor_id"
