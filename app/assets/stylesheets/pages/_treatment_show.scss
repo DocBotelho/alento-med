@@ -1,12 +1,19 @@
 .card-treatment {
   .card-block{
     background-color: white;
+
+  }
+
+  .title-card{
+   margin-top: 1px;
   }
   h4 {
     font-size: 30px;
     padding-left: 65px;
     padding-top: 20px;
   }
+
+
   hr {
     margin-top: 0px;
     margin-bottom: 13px;
@@ -44,3 +51,40 @@
     padding: 59px;
   }
 }
+.treatment-index {
+  .card-index{
+    padding: 7px;
+    margin-bottom: 20px;
+
+  }
+  p {
+    margin: 0;
+    padding-left: 0px;
+  }
+  h5 {
+    font-size: 18px;
+    margin-left: 13px;
+    margin-top: 35px;
+  }
+  a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 4px 16px;
+    margin-top: 38px;
+  }
+  h4 {
+    margin-top: 11.5px;
+    margin-bottom: 12.5px;
+    padding: 23px 0 0 19px;
+  }
+  hr {
+    width: 440px;
+  }
+}
+
+
+
+
+
+
+
