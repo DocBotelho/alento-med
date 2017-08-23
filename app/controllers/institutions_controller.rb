@@ -8,7 +8,7 @@ class InstitutionsController < ApplicationController
     location = [user_location.latitude, user_location.longitude]
 
     # added var range to limit/filter search by distance
-    range = 10
+    range = 10000
 
     @institutions = Institution.near(location, range).condition_search(@condition).where.not(latitude: nil, longitude: nil)
 
