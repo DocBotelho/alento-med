@@ -1,3 +1,8 @@
+<head>
+<% content_for :meta_title, "#{@institution.name} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @institution.address %>
+</head>
+
 <div class="modal fade" tabindex="-1" role="dialog" id="awareness">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
