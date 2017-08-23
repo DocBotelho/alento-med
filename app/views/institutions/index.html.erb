@@ -24,19 +24,20 @@
           <% else %>
 
             <!-- removed paginate @institutions inside ruby brackets -->
-
-            <h4>ALENTO encontrou <strong><%= "#{@institutions.size}" %></strong> centros clínicos que oferecem tratamento para <%= "#{@condition.downcase}" %></h4>
-
+            <div class="title-card">
+              <h4>ALENTO encontrou <strong><%= "#{@institutions.size}" %></strong> centros clínicos que oferecem tratamento para <%= "#{@condition.downcase}" %></h4>
+            </div>
             <% @institutions.each do |institution| %>
               <!-- code added to avoid showing repeated info -->
               <% if @check != institution %>
               <!-- code added to avoid showing repeated info -->
                 <div class="card-index" style="width: 100%;">
-                  <h5><%=institution.name%></h5>
+                  <h5> <strong><%=institution.name%></strong></h5>
                   <div class="col-xs-12 col-lg-9">
+                  <hr>
                     <!-- Added condition and distance from user to clinical center.
                     Should we keep the address showing? @jos31?  -->
-                    <h6>distância: 10km<h6>
+                    <p>distância: 10km<p>
                     <p>tratamento para <%= @condition %></p>
 
                     <!-- removed institution address from index page -->
@@ -59,7 +60,7 @@
 
         <div class="col-xs-12 col-lg-8">
           <!-- Lines added for Geocoding -->
-          <div id="map" style="width: 100%; height: 550px;">
+          <div id="map" style="width: 100%; height: 1000px;">
 
             <% content_for(:after_js) do %>
               <%= javascript_tag do %>
