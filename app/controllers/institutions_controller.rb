@@ -26,6 +26,7 @@ class InstitutionsController < ApplicationController
     # @trials = Trial.where('title @@ ?', 'study')
 
     @institution = Institution.find(params[:id])
+    @condition = params[:condition]
     @trials = @institution.trials.search_by_condition(@condition)
   end
 
