@@ -1,35 +1,51 @@
-.card {
-  background-color: white;
-  padding: 2px 2px 2px 2px;
-  border-radius: 5px;
+.treatment-card{
+ .card {
+    background-color: white;
+    padding: 2px 2px 2px 2px;
+    border-radius: 0px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 48px;
+  }
+
+  #title {
+    height: 150px;
+  }
+
+  #id {
+    height: 150px;
+  }
+
+
+  #text {
+    height:80px;
+    width: 80px;
+  }
+
+  .click-elements {
+    text-align: center;
+  }
+
+  .checkbox {
+    height:30px;
+    width: 30px;
+  }
+
+  #email_sender {
+    height:380px;
+    width: 500px;
+    background-color: white;
+    border-radius: 5px;
+  }
+  .title-research {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 71px;
+    padding-right: 85px;
+    padding-top: 0px;
+  }
 }
-
-#title {
-  height: 150px;
-}
-
-#id {
-  height: 150px;
-}
-
-
-#text {
-  height:80px;
-  width: 80px;
-}
-
-.click-elements {
-  text-align: center;
-}
-
-.checkbox {
-  height:30px;
-  width: 30px;
-}
-
-#email_sender {
-  height:380px;
-  width: 500px;
-  background-color: white;
-  border-radius: 5px;
+.card-intitution-name {
+  padding-left:30px;
 }
