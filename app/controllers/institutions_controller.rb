@@ -2,7 +2,7 @@ class InstitutionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    #add user location to narrow search
+    # add user_location to narrow search
 
     @condition = params[:condition]
     @institutions = Institution.condition_search(@condition).where.not(latitude: nil, longitude: nil)
