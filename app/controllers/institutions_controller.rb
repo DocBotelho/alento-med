@@ -11,7 +11,7 @@ class InstitutionsController < ApplicationController
     #original command before installing PG search gem
     # @institutions = Institution.joins(:trials).where('trials.condition @@ ?', "#{@condition}").where.not(latitude: nil, longitude: nil).distinct.page(params[:page])
 
-    @institutions = Institution.condition_search(@condition)
+    @institutions = Institution.condition_search(@condition).where.not(latitude: nil, longitude: nil)
 
     @hash = Gmaps4rails.build_markers(@institutions) do |institution, marker|
       marker.lat institution.latitude
