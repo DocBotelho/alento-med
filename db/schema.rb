@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20170823182137) do
     t.datetime "updated_at",    null: false
     t.string   "doctor_nct_id"
     t.string   "facility_id"
-    t.string   "role"
     t.string   "crm"
   end
 
