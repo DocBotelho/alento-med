@@ -1,0 +1,24 @@
+Promissing features:
+
+1) CLICK HEARD ON "PESQUISAR" button on NAVBAR to ask for USER consent to perform search based on his actual location
+
+<!-- JavaScript code to ask user for geolocation consent -->
+        <script>
+        var x = document.("demo");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+            "Longitude: " + position.coords.longitude;
+        }
+        </script>
+      <!-- JavaScript code to ask user for geolocation consent -->
+
+2) 
