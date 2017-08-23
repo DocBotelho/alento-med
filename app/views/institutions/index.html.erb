@@ -30,7 +30,7 @@
 
             <% @institutions.each do |institution| %>
               <!-- code added to avoid showing repeated info -->
-              <% if @check != institution %>
+              <% if @institution_check != institution %>
               <!-- code added to avoid showing repeated info -->
                 <div class="card-index" style="width: 100%;">
                   <h5><strong><%=institution.name%></strong></h5>
@@ -39,7 +39,17 @@
                     <!-- Added condition and distance from user to clinical center.
                     Should we keep the address showing? @jos31?  -->
                     <p>distância: 10km<p>
-                    <p>tratamento para <%= @condition %></p>
+
+                    <% @institution_conditions = [] %>
+                    <% institution.trials.search_by_condition(@condition).each do |trial| %>
+                      <% trial.condition.each do |condition| %>
+                        <% if @condition_check != condition %>
+                          <% @institution_conditions << condition %>
+                        <% end %>
+                        <% @condition_check = condition %>
+                      <% end %>
+                    <% end %>
+                    <p>oferece tratamento para: <%= @institution_conditions.join(", ") %></p>
 
                     <!-- removed institution address from index page -->
 
@@ -51,7 +61,7 @@
                 '</div>
               <% end %>
               <!-- code added to avoid showing repeated info -->
-              <% @check = institution %>
+              <% @institution_check = institution %>
               <!-- code added to avoid showing repeated info -->
             <% end %>
 
