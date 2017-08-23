@@ -56,15 +56,15 @@ class Syncer
       end
     end
 
-  Study.joins("INNER JOIN facilities on facilities.nct_id = studies.nct_id").where(WHERE, FACILITYWHERE).select("facilities.id as facility_id, facilities.nct_id as trial_id, facilities.name as facility_name, facilities.city as facility_city, facilities.state as facility_state, facilities.zip as facility_zip, facilities.country as facility_country").each do |facility|
+    Study.joins("INNER JOIN facilities on facilities.nct_id = studies.nct_id").where(WHERE, FACILITYWHERE).select("facilities.id as facility_id, facilities.nct_id as trial_id, facilities.name as facility_name, facilities.city as facility_city, facilities.state as facility_state, facilities.zip as facility_zip, facilities.country as facility_country").each do |facility|
 
-    institution = Institution.find_or_initialize_by(facility_id: facility.facility_id) if trial = Trial.find_by(trial_nct_id: facility.trial_id)
-    institution.name = facility.facility_name
-    institution.address = [facility.facility_name, facility.facility_city, facility.facility_state, facility.facility_country, facility.facility_zip].join(", ")
-    institution.institutioncontacts = []
-    institution.save!
-    trial.institutions << institution unless trial.institutions.include?(institution)
-  end
+      institution = Institution.find_or_initialize_by(facility_id: facility.facility_id) if trial = Trial.find_by(trial_nct_id: facility.trial_id)
+      institution.name = facility.facility_name
+      institution.address = [facility.facility_name, facility.facility_city, facility.facility_state, facility.facility_country, facility.facility_zip].join(", ")
+      institution.institutioncontacts = []
+      institution.save!
+      trial.institutions << institution unless trial.institutions.include?(institution)
+    end
 
 
     Study.joins("INNER JOIN facilities on facilities.nct_id = studies.nct_id INNER JOIN facility_contacts on facility_contacts.facility_id = facilities.id").where(WHERE, FACILITYWHERE).select("facility_contacts.name as facility_contacts_name, facility_contacts.email as facility_contacts_email, facility_contacts.phone as facility_contacts_phone, facility_contacts.facility_id as facility_contacts_facility_id, facility_contacts.nct_id as facility_contacts_nct_id").each do |fcontact|
@@ -76,16 +76,28 @@ class Syncer
       end
     end
 
-    Study.joins("INNER JOIN facilities on facilities.nct_id = studies.nct_id INNER JOIN facility_investigators on facility_investigators.facility_id = facilities.id").where(WHERE, FACILITYWHERE).select("facility_investigators.name as facility_investigators_name, facility_investigators.nct_id as facility_investigators_nct_id, facility_investigators.facility_id as facility_investigators_facility_id, facility_investigators.id as facility_investigators_id").each do |finvestigator|
-      if institution = Institution.find_by(facility_id: finvestigator.facility_investigators_facility_id)
-        doctor = Doctor.find_or_initialize_by(name: finvestigator.facility_investigators_name, investigatorid: finvestigator.facility_investigators_id)
-        doctor.facility_id = finvestigator.facility_investigators_facility_id
-        doctor_nct_id = finvestigator.facility_investigators_nct_id
-        doctor.save!
-        institution.doctors << doctor unless institution.doctors.include?(doctor)
-        trial = Trial.find_by(trial_nct_id: finvestigator.facility_investigators_nct_id)
-        trial.doctors << doctor unless trial.doctors.include?(doctor)
-        puts "Doctor saved and added to institution"
+    Study.joins("INNER JOIN facilities on facilities.nct_id = studies.nct_id INNER JOIN facility_investigators on facility_investigators.facility_id = facilities.id").where(WHERE, FACILITYWHERE).select("facility_investigators.name as facility_investigators_name, facility_investigators.nct_id as facility_investigators_nct_id, facility_investigators.facility_id as facility_investigators_facility_id, facility_investigators.id as facility_investigators_id, facility_investigators.role as facility_investigators_role").each do |finvestigator|
+        if trial = Trial.find_by(trial_nct_id: finvestigator.facility_investigators_nct_id)
+          if institution = Institution.find_by(facility_id: finvestigator.facility_investigators_facility_id)
+            doctor = Doctor.find_or_initialize_by(name: finvestigator.facility_investigators_name, role: finvestigator.facility_investigators_role)
+            doctor.role = finvestigator.facility_investigators_role
+            doctor.facility_id = finvestigator.facility_investigators_facility_id
+            doctor.doctor_nct_id = finvestigator.facility_investigators_nct_id
+            doctor.save!
+            institution.doctors << doctor unless institution.doctors.include?(doctor)
+            trial.doctors << doctor unless trial.doctors.include?(doctor)
+            puts "Doctor saved and added to institution"
+          end
+        end
+      end
+
+    Study.joins("INNER JOIN overall_officials on overall_officials.nct_id = studies.nct_id INNER JOIN facilities on facilities.nct_id = studies.nct_id").where(WHERE).select("overall_officials.nct_id as overall_officials_nct_id, overall_officials.role as overall_officials_role, overall_officials.role as overall_officials_role, overall_officials.name as overall_officials_name").each do |official|
+      if trial = Trial.find_by(trial_nct_id: official.overall_officials_nct_id)
+        doctor = Doctor.find_or_initialize_by(name: official.overall_officials_name, role: official.overall_officials_role)
+      doctor.doctor_nct_id = official.overall_officials_nct_id
+      doctor.save!
+      trial.doctors << doctor unless trial.doctors.include?(doctor)
+      puts "Doctor added to trials"
       end
     end
   end
