@@ -1,5 +1,5 @@
 meta_product_name: "AlentoMed"
 meta_title: "Encontre tratamentos médicos gratuitos conduzidos por pesquisas clínicas através da AlentoMed"
 meta_description: "Encontre tratamentos médicos gratuitos conduzidos por pesquisas clínicas através da AlentoMed"
-meta_image: "pesquisaclinica.jpg"                       # should exist in `app/assets/images/`
+meta_image: "pesquisaclinicameta.jpg"                       # should exist in `app/assets/images/`
 twitter_account: "@alentomed"   # required for Twitter Cards
