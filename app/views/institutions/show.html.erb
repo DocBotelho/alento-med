@@ -113,7 +113,10 @@
 
       <div class="">
         <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
-        <p><%= trial.eligibility %></p>
+        <p>São aceitos como voluntários  as seguintes pessoas</p>
+        <p>Gêneros: <%= trial.eligibility.split(",")[0] %></p>
+        <p>Idade mínima: <%= trial.eligibility.split(",")[1] %></p>
+        <p>Idade máxima: <%= trial.eligibility.split(",")[2] %></p>
       </div>
 
       <div class="">
