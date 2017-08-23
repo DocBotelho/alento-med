@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.3.3'
 
+#gem added to improve search by condition (condition:array)
+gem 'pg_search'
+
 #gem added for email controller postmark
 gem 'postmark-rails'
 

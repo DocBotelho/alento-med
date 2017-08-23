@@ -6,12 +6,12 @@ class InstitutionsController < ApplicationController
   def index
     @condition = params[:condition]
 
-    # review line to fix search by distance from user_location
-    @institutions = Institution.where('address @@ ?', 'São Paulo')
+    # commands below used to force var contents and run app before installing pgsearch gem
+    # @institutions = Institution.where('address @@ ?', 'São Paulo')
+    #original command before installing PG search gem
+    # @institutions = Institution.joins(:trials).where('trials.condition @@ ?', "#{@condition}").where.not(latitude: nil, longitude: nil).distinct.page(params[:page])
 
-    # commmented line below and replaced by line above to make it run before pgsearch
-    # Institution.joins(:trials).where('trials.condition @@ ?', "#{@condition}").where.not(latitude: nil, longitude: nil).distinct
-    # .page(params[:page])
+    @institutions = Institution.condition_search(@condition)
 
     @hash = Gmaps4rails.build_markers(@institutions) do |institution, marker|
       marker.lat institution.latitude
@@ -20,16 +20,13 @@ class InstitutionsController < ApplicationController
   end
 
   def show
-    @institution = Institution.find(1)
-    # commmented line below and replaced by line above to make it run before pgsearch
-    # @institution = Institution.find(params[:id])
+    # commands below used to force var contents and run app before installing pgsearch gem
+    # @institution = Institution.find(1)
+    # @condition = "diabetes virtual do tipo ZZZ"
+    # @trials = Trial.where('title @@ ?', 'study')
 
-    @condition = "diabetes virtual do tipo ZZZ"
-
-
-    @trials = Trial.where('title @@ ?', 'study')
-    # commmented line below and replaced by line above to make it run before pgsearch
-    # @trials = @institution.trials.where('condition @@ ?', "#{@condition}")
+    @institution = Institution.find(params[:id])
+    @trials = @institution.trials.search_by_condition(@condition)
   end
 
   private

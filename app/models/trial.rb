@@ -11,4 +11,8 @@ class Trial < ApplicationRecord
   has_many :doctors, through: :trialdoctors, dependent: :destroy
 
   validates_uniqueness_of :trial_nct_id
+
+  include PgSearch
+  pg_search_scope :search_by_condition, :against => :condition
+
 end
