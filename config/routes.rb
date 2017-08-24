@@ -8,6 +8,6 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
   root to: 'pages#home'
-  resources :treatments, only: [:index, :show]
+  resources :treatments, only: [:create, :index]
   resources :institutions, only: [:index, :show]
 end

@@ -4,8 +4,8 @@ ruby '2.3.3'
 #gem added to improve search by condition (condition:array)
 gem 'pg_search'
 
-#gem added for email controller postmark
-gem 'postmark-rails'
+#SendGrid GEM
+gem 'sendgrid-ruby'
 
 gem 'kaminari'
 
@@ -21,6 +21,7 @@ end
 gem 'omniauth-facebook'
 gem 'figaro'
 gem 'devise'
+gem 'httparty'
 
 #gems added by rails le wagon minimum
 gem 'jbuilder', '~> 2.0'
