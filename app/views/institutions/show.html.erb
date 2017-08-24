@@ -51,11 +51,9 @@
 
         <div class="text-center" id="title">
           <% if @trials.size == 1 %>
-            <h4>Essa instituição conduz <strong>1</strong> pesquisa que oferece
-            tratamento para <%= @condition %></h4>
+            <h4>Essa instituição encontra-se à <strong><%= params[:distance] %> km</strong> de você e conduz <strong>1</strong> pesquisa que oferece tratamento para <strong><%= @condition %></strong></h4>
           <% else %>
-            <h4>Essa instituição conduz <strong><%= @trials.size %></strong> pesquisas que oferecem
-            tratamento para <%= @condition %></h4>
+            <h4>Essa instituição encontra-se à <strong><%= params[:distance] %> km</strong> de você e conduz <strong><%= @trials.size %></strong> pesquisas que oferecem tratamento para <strong><%= @condition %></strong></h4>
           <% end %>
         </div>
       </div>

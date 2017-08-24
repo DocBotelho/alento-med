@@ -31,34 +31,21 @@
               <% end %>
             </div>
 
-            <!-- #Jos31, please verify if this line should be moved inside the div -->
             <% @institutions.each do |institution| %>
-            <!-- #Jos31, please verify if this line should be moved inside the div -->
-
               <div class="card-index col-xs-12 col-lg-4">
-              <!-- #Jos31, please verify why the card is breaking -->
-
-                <h5><strong><%=institution.name%></strong></h5>
-                <hr>
-
-                <div class="">
-                  <% @institution_conditions = [] %>
-                  <% institution.trials.search_by_condition(@condition).each do |trial| %>
-                    <% trial.condition.each do |condition| %>
-                      <% @institution_conditions << condition %>
-                    <% end %>
+                <br>
+                <h4><%=institution.name%> <strong>está a somente <%= @distance = institution.distance.round(1) %> km</strong> de você
+                <% @institution_conditions = [] %>
+                <% institution.trials.search_by_condition(@condition).each do |trial| %>
+                  <% trial.condition.each do |condition| %>
+                    <% @institution_conditions << condition %>
                   <% end %>
-                  <p>oferece tratamento para: <%= @institution_conditions.join(", ") %></p>
-                </div>
+                <% end %>
+                e oferece tratamentos para <strong><%= @institution_conditions.join(", ") %></strong></h4>
 
-                <div class="">
-                  <%= link_to "Conheça", institution_path(institution, condition: @condition), class: "btn btn-primary" %>
-                </div>
-
+                <%= link_to "Saiba mais", institution_path(institution, condition: @condition, distance: @distance), class: "btn btn-primary" %>
               </div>
-
             <% end %>
-
           <% end %>
         </div>
 
