@@ -8,4 +8,9 @@ class Treatment < ApplicationRecord
   def send_contactuser_email
     UserMailer.contactuser(self).deliver_now
   end
+
+  def send_contactstudy_email
+    @trial = @institution.trial
+    @studycontact = @institution
+  end
 end

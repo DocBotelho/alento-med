@@ -29,9 +29,12 @@ class UserMailer < ApplicationMailer
     @greeting = "Olá #{@user.name},"
     @briefintro = "Obrigado pelo seu interesse em utilizar nossa plataforma para participar do tratamento: #{treatment.trial.title}."
     @intro = "Nós enviamos as seguintes informações de contato para a instituição responsável pelo estudo cientifico que conduzirá o tratamento: Nome: #{@user.name}, Email: #{@user.email} e Telefone: #{@user.phone}. A partir de agora, você pode aguardar o contato da instituição para prosseguir com os procedimentos. Se houver algum erro nos seus dados fornecidos, por favor corrija as informações em seu cadastro clicando na sua foto de perfil no canto superior direito e em seguida editar cadastro. Após isso, candidate-se no estudo novamente ou entre em contato através das informações abaixo."
+
     @institutionname = "Nome da instituição: #{treatment.institution.name}"
     @institutionaddress = "Endereço: #{treatment.institution.address}"
     @medics = "Médicos(as) responsáveis: #{treatment.institution.doctors.pluck(:name)}"
+    
+    # COMMENTED TO MAKE IT RUN with TA's, MARCOS, ASSISTANCE
     # @contactemail = "Email(s) para contato: #{
     #   unless treatment.institution.institutioncontacts[0][:email].nil?
     #     treatment.institution.institutioncontacts[0][:email]
@@ -47,6 +50,7 @@ class UserMailer < ApplicationMailer
     #   end
     #   }"
     @nctindentifier = "Identificador NCT: #{treatment.trial.trial_nct_id}"
+
     @reminder = "Lembre-se que cada estudo tem critérios de seleção especificos dos seus participantes e a Alento não participa do processo de seleção dos pacientes a serem tratados pelo estudo. Consulte mais detalhes em nossa página e nos links fornecidos, ou entre diretamente em contato com os responsáveis pelo estudo ou conosco através do email contato@alentomed.com.br para mais informações."
     @ending = "Agradecemos a sua visita e lhe desejamos muita saúde."
     @att = "Atenciosamente,"
@@ -59,16 +63,16 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.contactstudy.subject
   #
-  def contactstudy(user)
-    @user = user
-    @greeting = "Olá #{Trialdoctor.last.doctor.name}"
+  def contactstudy(studycontact)
+    @studycontact = studycontact
+    @greeting = "Olá #{@studycontact.name}"
     @briefintro = "Nós somos a Alento. Uma plataforma que visa conectar usuários com tratamentos conduzidos por pesquisas clinicas. Você pode checar nossa plataforma através do site: www.alentomed.com.br."
-    @intro = "Um usuário utilizou a nossa plataforma para expressar que tem interesse em participar do seu estudo cientifico #{Trial.last.title} com identificador #{Trial.last.trial_nct_id}. Abaixo constam as informações do usuário para que possa ser dado prosseguimento nas etapas de aceitação do paciente. Enviamos também um email para o usuário com as seguintes informações de contato: email: #{Trialdoctor.last.doctor.email}, telefone: #{Trialdoctor.last.doctor.phone}. Seguem as informações do usuário abaixo:"
-    @username = "Nome: #{User.last.name}"
-    @useremail = "Email do usuário: #{User.last.email}"
-    @userphone = "Telefone p/ contato: #{User.last.phone}"
+    @intro = "Um usuário utilizou a nossa plataforma para expressar que tem interesse em participar do seu estudo cientifico #{@trial.title} com identificador #{@trial.trial_nct_id}. Abaixo constam as informações do usuário para que possa ser dado prosseguimento nas etapas de aceitação do paciente. Enviamos também um email para o usuário com as seguintes informações de contato: email: #{@studycontact.email}, telefone: #{@studycontact.phone}. Seguem as informações do usuário abaixo:"
+    @username = "Nome: #{@user.name}"
+    @useremail = "Email do usuário: #{@user.email}"
+    @userphone = "Telefone p/ contato: #{@user.phone}"
     @disclaimer = "Todas as nossas informações são obtidas através do banco de dados do site clinicaltrials.gov , caso haja alguma inconsistência nas iformações por favor entre em contato através do email contato@alentomed.com.br ou entre em contato com a equipe Clinical Trials."
-    @ending = "Agradecemos a sua visita e lhe desejamos muita saúde."
+    @ending = "Parabéns pelo seu trabalho."
     @att = "Atenciosamente,"
     @alentoteam = "Equipe Alento"
 
