@@ -2,11 +2,10 @@ class Treatment < ApplicationRecord
   belongs_to :user
   belongs_to :trial
   belongs_to :institution
-  belongs_to :doctor
+  belongs_to :doctor, optional: true
   after_create :send_contactuser_email
 
   def send_contactuser_email
-    @user = @treatment.user
-    UserMailer.contactuser(@user).deliver_now
+    UserMailer.contactuser(self).deliver_now
   end
 end

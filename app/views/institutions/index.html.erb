@@ -5,7 +5,7 @@
 
         <div class="col-xs-12 col-md-4 col-lg-4">
           <% if @institutions.size == 0 %>
-            <% if @condition == "" %>
+            <% if @user_condition == "" %>
               <div class="card-index" style="width: 100%;">
                 <h4 class="text-center">
                  <strong>Pedimos desculpas!</strong>
@@ -17,7 +17,7 @@
                 <h4 class="text-center">
                  <strong>Pedimos desculpas!</strong>
                 </h4>
-                   <p><%= "ALENTO não encontrou estudos clínicos no Brasil que esteja recrutando pacientes para a \"#{@condition.downcase}\" no momento" %></p>
+                   <p><%= "ALENTO não encontrou estudos clínicos no Brasil que esteja recrutando pacientes para a \"#{@user_condition.downcase}\" no momento" %></p>
               </div>
             <% end %>
 
@@ -25,12 +25,12 @@
 
           <div class="title-card">
               <% if @institutions.size == 1 %>
-                <h4>ALENTO encontrou <strong>1</strong> centro clínico que oferece tratamento para "<%= @condition.downcase %>"</h4>
+                <h4>ALENTO encontrou <strong>1</strong> centro clínico que oferece tratamento para "<%= @user_condition.downcase %>"</h4>
               <% else %>
-                <h4>ALENTO encontrou <strong><%= @institutions.size %></strong> centros clínicos que oferecem tratamento para "<%= @condition.downcase %>" perto de você</h4>
+                <h4>ALENTO encontrou <strong><%= @institutions.size %></strong> centros clínicos que oferecem tratamento para "<%= @user_condition.downcase %>" perto de você</h4>
               <% end %>
             </div>
-          
+
             <%= paginate @institutions_paginate %>
             <% @institutions_paginate.each do |institution| %>
               <div class="card-index col-xs-12 col-lg-4">
@@ -40,7 +40,8 @@
                 <% @institution_conditions = [] %>
                 <% institution.trials.search_by_condition(@condition).each do |trial| %>
                   <% trial.condition.each do |condition| %>
-                    <% @institution_conditions << condition %>
+                    <% condition = Disease.find_by(english: condition) %>
+                    <% @institution_conditions << condition.portuguese %>
                   <% end %>
                 <% end %>
                 e oferece tratamentos para <strong><%= @institution_conditions.join(", ") %></strong></p>
