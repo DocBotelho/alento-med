@@ -3,59 +3,18 @@
 <% content_for :meta_description, @institution.address %>
 </head>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="awareness">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">MENSAGEM DE ALENTO</h4>
-      </div>
-      <div class="modal-body">
-        <p>
-          Pesquisas clínicas são reguladas pela ANVISA. Por meio delas, são oferecidos ao paciente tratamentos gratuitos com medicamentos em fase experimental.
+<div class="row text-center">
+  <!-- code to add Traslation button from Google -->
+  <div id="google_translate_element">
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'pt', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+      }
 
-          Nossa plataforma busca trazer um ALENTO às pessoas em busca de tratamentos médicos, porém não podemos garantir a efetividade desses tratamentos, que são de responsabilidade da equipe médica que conduz o estudo.
-
-          Ao clicar em QUERO CANDIDATAR, você autoriza que seus dados de contato sejam enviados para à equipe médica responsável.
-        </p>
-      </div>
-      <div class="modal-footer">
-        <ul class="list-inline">
-          <li>
-
-            <%= simple_form_for @treatments do |f| %>
-              <% f.hidden_field :institution, @institution %>
-              <% f.hidden_field :trial, trial %>
-              <% f.hidden_field :doctor, trial.doctors %>
-              <%= f.butt :submit, "Estou ciente e quero me candidatar para participar", class: "btn btn-block btn-primary" %>
-            <% end %>
-
-
-            <!-- remove after simple form for works -->
-            <%= button_to "Estou ciente e quero me candidatar para participar", treatments_path, method: :post, class: "btn btn-block btn-primary" %>
-            
-          </li>
-          <li>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Desistir</button>
-          </li>
-        </ul>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-    <div class="row text-center">
-      <!-- code to add Traslation button from Google -->
-      <div id="google_translate_element">
-        <script type="text/javascript">
-          function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'pt', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
-          }
-
-        </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-      </div>
-    <!-- end of code to add Traslation button from Google -->
-    </div>
+    </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  </div>
+<!-- end of code to add Traslation button from Google -->
+</div>
 
 <div class="container treatment-card">
     <br>
@@ -144,5 +103,46 @@
 
       </div>
     </div>
+
+    <!-- Beggining of modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="awareness">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">MENSAGEM DE ALENTO</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+              Pesquisas clínicas são reguladas pela ANVISA. Por meio delas, são oferecidos ao paciente tratamentos gratuitos com medicamentos em fase experimental.
+
+              Nossa plataforma busca trazer um ALENTO às pessoas em busca de tratamentos médicos, porém não podemos garantir a efetividade desses tratamentos, que são de responsabilidade da equipe médica que conduz o estudo.
+
+              Ao clicar em QUERO CANDIDATAR, você autoriza que seus dados de contato sejam enviados para à equipe médica responsável.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <ul class="list-inline">
+              <li>
+
+              <%= simple_form_for @treatment do |f| %>
+                  <%= f.hidden_field :institution_id, value: @institution.id %>
+                  <%= f.hidden_field :trial_id, value: trial.id %>
+                  <%= f.button :submit, "Estou ciente e quero me candidatar para participar", class: "btn btn-block btn-primary" %>
+                <% end %>
+
+              </li>
+              <li>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Desistir</button>
+              </li>
+            </ul>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- End of modal -->
+
+
+
   <% end %>
 </div>s

@@ -24,34 +24,38 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.contactuser.subject
   #
-  def contactuser(user)
-    @user = user
+  def contactuser(treatment)
+    @user = treatment.user
     @greeting = "Olá #{@user.name},"
-    @briefintro = "Obrigado pelo seu interesse em utilizar nossa plataforma para participar do tratamento: #{@treatment.trial.title}."
+    @briefintro = "Obrigado pelo seu interesse em utilizar nossa plataforma para participar do tratamento: #{treatment.trial.title}."
     @intro = "Nós enviamos as seguintes informações de contato para a instituição responsável pelo estudo cientifico que conduzirá o tratamento: Nome: #{@user.name}, Email: #{@user.email} e Telefone: #{@user.phone}. A partir de agora, você pode aguardar o contato da instituição para prosseguir com os procedimentos. Se houver algum erro nos seus dados fornecidos, por favor corrija as informações em seu cadastro clicando na sua foto de perfil no canto superior direito e em seguida editar cadastro. Após isso, candidate-se no estudo novamente ou entre em contato através das informações abaixo."
-    @institutionname = "Nome da instituição: #{@treatment.institution.name}"
-    @institutionaddress = "Endereço: #{@treatment.institution.address}"
-    @medics = " Médicos(as) responsáveis: #{@treatment.institution.doctors.pluck(:name)}"
-    @contactemail = "Email(s) para contato: #{
-      unless @treatment.institution.institutioncontacts[:email].nil?
-        @treatment.institution.institutioncontacts[:email]
-      else
-        @treatment.trial.centralcontacts[:email]
-      end
-      }"
-    @contactphone = "Número de telefone para contato: #{
-      unless @treatment.institution.institutioncontacts[:phone].nil?
-        @treatment.institution.institutioncontacts[:phone]
-      else
-        @treatment.trial.centralcontacts[:phone]
-      end
-      }"
-    @nctindentifier = "Identificador NCT: #{@treatment.trial.trial_nct_id}"
+
+    @institutionname = "Nome da instituição: #{treatment.institution.name}"
+    @institutionaddress = "Endereço: #{treatment.institution.address}"
+    @medics = "Médicos(as) responsáveis: #{treatment.institution.doctors.pluck(:name)}"
+    
+    # COMMENTED TO MAKE IT RUN with TA's, MARCOS, ASSISTANCE
+    # @contactemail = "Email(s) para contato: #{
+    #   unless treatment.institution.institutioncontacts[0][:email].nil?
+    #     treatment.institution.institutioncontacts[0][:email]
+    #   else
+    #     treatment.trial.centralcontacts[0][:email]
+    #   end
+    #   }"
+    # @contactphone = "Número de telefone para contato: #{
+    #   unless treatment.institution.institutioncontacts[0][:phone].nil?
+    #     treatment.institution.institutioncontacts[0][:phone]
+    #   else
+    #     treatment.trial.centralcontacts[0][:phone]
+    #   end
+    #   }"
+    @nctindentifier = "Identificador NCT: #{treatment.trial.trial_nct_id}"
+
     @reminder = "Lembre-se que cada estudo tem critérios de seleção especificos dos seus participantes e a Alento não participa do processo de seleção dos pacientes a serem tratados pelo estudo. Consulte mais detalhes em nossa página e nos links fornecidos, ou entre diretamente em contato com os responsáveis pelo estudo ou conosco através do email contato@alentomed.com.br para mais informações."
     @ending = "Agradecemos a sua visita e lhe desejamos muita saúde."
     @att = "Atenciosamente,"
     @alentoteam = "Equipe Alento"
-    mail(to: @user.email, subject: "Informações sobre o tratamento: #{@treatment.trial.title}")
+    mail(to: @user.email, subject: "Informações sobre o tratamento: #{treatment.trial.title}")
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
