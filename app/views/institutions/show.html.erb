@@ -22,13 +22,13 @@
       <div class="modal-footer">
         <ul class="list-inline">
           <li>
-            <%form_tag(treatments_path, method: => "post", id: "treatment-create") do %>
-              @treatment.user = current_user
-              @treatment.institution = @institution
-              @treatment.trial = @institution.trial
-              @treatment.doctor = @institution.trial.doctor
-              <%= submit_tag "Estou ciente e quero me candidatar para participar", class: "btn btn-block btn-primary" %>
-            <%end%>
+            <%= simple_form_for @treatments do |f| %>
+              <% f.hidden_field @treatment.user = current_user %>
+              <% f.hidden_field @treatment.institution = @institution %>
+              <% f.hidden_field @treatment.trial = @institution.trial %>
+              <% f.hidden_field @treatment.doctor = @institution.trial.doctor %>
+              <%= f.button :submit, "Estou ciente e quero me candidatar para participar", class: "btn btn-block btn-primary" %>
+            <% end %>
 
           </li>
           <li>
