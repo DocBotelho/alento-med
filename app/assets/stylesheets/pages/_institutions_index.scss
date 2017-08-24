@@ -1,7 +1,7 @@
 .treatment-index {
   .card-index {
      background-color: white;
-     width: 100%
+     width: 100%;
    }
    .card-global {
      padding:30px;
@@ -21,34 +21,10 @@
    }
    p  {
       margin: 0 0 42.5px;
-      padding-left: 11px;
+      padding-left: 16px;
    }
-
-    a {
-      text-decoration: none;
-      display: inline-block;
-      padding: 8px 16px;
-      margin-top: 38px;
-      margin-left: 270px;
-   }
-
-   a:hover {
-       background-color: #ddd;
-       color: black;
-   }
-
-   .previous {
-       background-color: #f1f1f1;
-       color: black;
-   }
-
-   .next {
-       background-color: #4CAF50;
-       color: white;
-   }
-
    .round {
-       border-radius: 50%;
+      border-radius: 50%;
    }
  }
  .treatment-index p {
@@ -56,3 +32,41 @@
     padding-left: 15px;
     padding-right: 10px;
   }
+
+nav.pagination {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  span {
+    padding-right: 10px;
+  }
+
+  a {
+      text-decoration: none;
+      display: inline-block;
+      padding: 0px 0px;
+      margin-top: 0px;
+      margin-left: 0px;
+   }
+
+   a:hover {
+     background-color: #ddd;
+     color: black;
+   }
+
+   .previous {
+     background-color: #f1f1f1;
+     color: black;
+   }
+
+   // .next {
+   //   background-color: #4CAF50;
+   //   color: white;
+   // }
+
+   .round {
+      border-radius: 50%;
+   }
+}

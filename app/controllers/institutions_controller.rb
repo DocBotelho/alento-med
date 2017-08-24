@@ -11,7 +11,7 @@ class InstitutionsController < ApplicationController
     range = 10000
 
     @institutions = Institution.near(location, range).condition_search(@condition).where.not(latitude: nil, longitude: nil)
-
+    @institutions_paginate = @institutions.page(params[:page])
     @hash = Gmaps4rails.build_markers(@institutions) do |institution, marker|
       marker.lat institution.latitude
       marker.lng institution.longitude
