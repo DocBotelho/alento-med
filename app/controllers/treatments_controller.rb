@@ -1,8 +1,12 @@
 class TreatmentsController < ApplicationController
 
+  def new
+    @treatment = Treatment.new()
+  end
+
   def create
   @treatment = Treatment.new(treatment_params)
-  @treatment.user_id = current_user.id
+  @treatment.user = current_user
   @treatment.save!
     if user_current.email == ""
       redirect_to edit_user_path(current_user)
