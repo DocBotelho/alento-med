@@ -1,8 +1,5 @@
 class TreatmentsController < ApplicationController
 
-  def new
-  end
-
   def create
   @treatment = Treatment.new(treatment_params)
   @treatment.user_id = current_user.id
@@ -16,11 +13,6 @@ class TreatmentsController < ApplicationController
 
   def index
     @treatments = Treatment.where(user_id: current_user)
-    #MOVED TO INSTITUTION CONTROLLER By DocBotelho
-  end
-
-  def show
-
   end
 
   private
