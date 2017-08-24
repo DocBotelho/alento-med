@@ -2,8 +2,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   config.action_mailer.delivery_method     = :smtp
-  config.action_mailer.smtp_settings   = { address: 'smtp.sendgrid.ne
-', port: 465, user_name: 'apikey', password: ENV['SENDGRID_API_KEY'] }
+  config.action_mailer.smtp_settings   = { address: 'smtp.sendgrid.net', port: 465, user_name: 'apikey', password: ENV['SENDGRID_API_KEY'] }
   config.action_mailer.default_url_options = { host: "www.alentomed.com.br" }
 
   # Code is not reloaded between requests.
