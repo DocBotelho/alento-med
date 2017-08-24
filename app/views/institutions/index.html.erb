@@ -27,7 +27,7 @@
               <% if @institutions.size == 1 %>
                 <h4>ALENTO encontrou <strong>1</strong> centro clínico que oferece tratamento para "<%= @condition.downcase %>"</h4>
               <% else %>
-                <h4>ALENTO encontrou <strong><%= @institutions.size %></strong> centros clínicos que oferecem tratamento para "<%= @condition.downcase %>"</h4>
+                <h4>ALENTO encontrou <strong><%= @institutions.size %></strong> centros clínicos que oferecem tratamento para "<%= @condition.downcase %>" perto de você</h4>
               <% end %>
             </div>
 
