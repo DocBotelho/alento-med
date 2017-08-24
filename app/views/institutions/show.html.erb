@@ -22,12 +22,18 @@
       <div class="modal-footer">
         <ul class="list-inline">
           <li>
+
             <%= simple_form_for @treatments do |f| %>
               <% f.hidden_field :institution, @institution %>
               <% f.hidden_field :trial, trial %>
               <% f.hidden_field :doctor, trial.doctors %>
               <%= f.butt :submit, "Estou ciente e quero me candidatar para participar", class: "btn btn-block btn-primary" %>
             <% end %>
+
+
+            <!-- remove after simple form for works -->
+            <%= button_to "Estou ciente e quero me candidatar para participar", treatments_path, method: :post, class: "btn btn-block btn-primary" %>
+            
           </li>
           <li>
             <button type="button" class="btn btn-default" data-dismiss="modal">Desistir</button>

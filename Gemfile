@@ -21,6 +21,7 @@ end
 gem 'omniauth-facebook'
 gem 'figaro'
 gem 'devise'
+gem 'httparty'
 
 #gems added by rails le wagon minimum
 gem 'jbuilder', '~> 2.0'

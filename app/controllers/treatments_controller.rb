@@ -17,11 +17,6 @@ class TreatmentsController < ApplicationController
 
   def index
     @treatments = Treatment.where(user_id: current_user)
-    #MOVED TO INSTITUTION CONTROLLER By DocBotelho
-  end
-
-  def show
-
   end
 
   private
