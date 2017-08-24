@@ -22,3 +22,12 @@ class Institution < ApplicationRecord
   }
 
 end
+
+def gmaps4rails_marker_picture
+ {
+  "picture" => "/image/logo 02.png",          # string,  mandatory
+   "width" =>  32,          # integer, mandatory
+   "height" => 32,          # integer, mandatory
+                         # See doc here: http://google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/docs/reference.html
+ }
+end
