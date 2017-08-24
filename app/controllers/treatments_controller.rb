@@ -1,10 +1,6 @@
 class TreatmentsController < ApplicationController
 
   def new
-    @treatment = Treatment.new
-  end
-
-  def create
     @treatment = Treatment.new(treatment_params)
     @treatment.save!
     if user_current.email == ""
@@ -12,6 +8,10 @@ class TreatmentsController < ApplicationController
     else
       redirect_to treatments_path
     end
+  end
+
+  def create
+
   end
 
   def index
@@ -26,7 +26,7 @@ class TreatmentsController < ApplicationController
   private
 
   def treatment_params
-    params.require(:treatment).permit(:institution_id, :trial_id, :doctor_id, :user_id)
+    params.require(:treatment).permit(:institution_id, :trial_id, :doctor_id, user_id: current_user.id)
   end
 
 end
