@@ -32,15 +32,13 @@
             </div>
 
             <% @institutions.each do |institution| %>
-              <div class="card-index col-xs-11 col-lg-4">
-                <h5><strong><%=institution.name%></strong></h5>
-                <hr>
-                <div class="">
-                  <% @institution_conditions = [] %>
-                  <% institution.trials.search_by_condition(@condition).each do |trial| %>
-                    <% trial.condition.each do |condition| %>
-                      <% @institution_conditions << condition %>
-                    <% end %>
+              <div class="card-index col-xs-12 col-lg-4">
+                <br>
+                <h4><%=institution.name%> <strong>está a somente <%= @distance = institution.distance.round(1) %> km</strong> de você
+                <% @institution_conditions = [] %>
+                <% institution.trials.search_by_condition(@condition).each do |trial| %>
+                  <% trial.condition.each do |condition| %>
+                    <% @institution_conditions << condition %>
                   <% end %>
                 <% end %>
                 e oferece tratamentos para <strong><%= @institution_conditions.join(", ") %></strong></h4>
@@ -51,7 +49,7 @@
           <% end %>
         </div>
 
-        <div class="col-xs-11 col-lg-8">
+        <div class="col-xs-12 col-lg-8">
           <!-- Lines added for Geocoding -->
           <div id="map" style="width: 100%; height: 800px;">
 
