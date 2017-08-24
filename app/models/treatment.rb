@@ -12,5 +12,6 @@ class Treatment < ApplicationRecord
 
   def send_contactstudy_email
     @trial = @institution.trial
-    @studycontact = @institutio.
+    @studycontact = @institution
+  end
 end
