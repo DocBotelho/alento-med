@@ -26,7 +26,7 @@ class UserMailer < ApplicationMailer
   #
   def contactuser(user)
     @user = user
-    @greeting = "Olá #{@user.name},"
+    @greeting = "Olá #{current_user.name},"
     @briefintro = "Obrigado pelo seu interesse em utilizar nossa plataforma para participar do tratamento: #{Trial.last.title}."
     @intro = "Nós enviamos as seguintes informações de contato para a instituição responsável pelo estudo cientifico que conduzirá o tratamento: Nome: #{@user.name}, Email: #{@user.email} e Telefone: #{@user.phone}. A partir de agora, você pode aguardar o contato da instituição para prosseguir com os procedimentos. Se houver algum erro nos seus dados fornecidos, por favor corrija as informações em seu cadastro clicando na sua foto de perfil no canto superior direito e em seguida editar cadastro. Após isso, candidate-se no estudo novamente ou entre em contato através das informações abaixo."
     @institutionname = "Nome da instituição: #{Institution.last.name}"
@@ -39,7 +39,7 @@ class UserMailer < ApplicationMailer
     @ending = "Agradecemos a sua visita e lhe desejamos muita saúde."
     @att = "Atenciosamente,"
     @alentoteam = "Equipe Alento"
-    mail(to: @user.email, subject: "Informações sobre o tratamento: #{Trial.last.title}")
+    mail(to: @user.email, subject: "Informações sobre o tratamento: #{@treatment.trial.name}")
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
