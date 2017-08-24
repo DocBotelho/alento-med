@@ -74,24 +74,35 @@
           <button data-toggle="modal" data-target="#awareness" class="btn btn-primary">Quero Candidatar</button>
         </div>
       </div>
-      <hr>
-      <div class="text-center col-xs-12 col-md-6 col-md-offset-6">
+      <br>
+      <div class="row">
+        <div class="col-xs-12 col-md-3">
+        </div>
+        <div class="col-xs-12 col-md-8">
           <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "https://www.clinicaltrials.gov/ct2/show/#{trial.trial_nct_id}", target: "_blank" %>
         </div>
+      </div>
+
+      <hr>
+      <div class="text-center col-xs-12 col-md-6 col-md-offset-6">
+      </div>
 
       <div class="">
         <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
         <p><%= trial.description %></p>
-
       </div>
+      <br>
+      <br>
+      <br>
 
       <div class="">
         <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
-        <p>São aceitos como voluntários  as seguintes pessoas</p>
-        <p>Gêneros: <%= trial.eligibility.split(",")[0] %></p>
-        <p>Idade mínima: <%= trial.eligibility.split(",")[1] %></p>
-        <p>Idade máxima: <%= trial.eligibility.split(",")[2] %></p>
+        <p>Podem se candidatar ao tratamento as pessoas que</p>
+        <p>forem do gênero:  <%= trial.eligibility.split(",")[0] %></p>
+        <p>possuírem mais de: <%= trial.eligibility.split(",")[1] %></p>
+        <p>e menos de: <%= trial.eligibility.split(",")[2] %></p>
       </div>
+      <br>
 
       <div class="">
         <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
@@ -100,8 +111,8 @@
         <% @array << doctor.name %>
         <% end %>
         <p><%= @array.join ", " %></p>
-
       </div>
+      <br>
     </div>
 
     <!-- Beggining of modal -->
