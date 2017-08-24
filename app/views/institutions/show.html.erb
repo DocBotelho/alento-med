@@ -20,96 +20,118 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
-        <%= button_to "Estou Ciente", treatments_path, method: :get, class: "btn btn-primary" %>
+        <ul class="list-inline">
+          <li>
+            <%= button_to "Estou ciente e quero me candidatar para participar", treatments_path, method: :get, class: "btn btn-block btn-primary" %>
+          </li>
+          <li>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Desistir</button>
+          </li>
+        </ul>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+    <div class="row text-center">
+      <!-- code to add Traslation button from Google -->
+      <div id="google_translate_element">
+        <script type="text/javascript">
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'pt', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+          }
 
+        </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      </div>
+    <!-- end of code to add Traslation button from Google -->
+    </div>
 
 <div class="container treatment-card">
-
-
-  <div class="">
-    <div class="card-intitution-name">
-      <h2><%= @institution.name %></h2>
-      <h4>Estão disponíveis <strong><%= "#{@trials.size}" %></strong> tratamentos para <%= "#{@condition.downcase}" %>
-      </h4>
-    </div>
-  </div>
-
-  <div class="">
+    <br>
     <div class="row">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <!-- beggining of map -->
-          <div id="map" style="height:300px">
-          </div>
-          <!-- Gmaps js: building the map -->
-            <% content_for(:after_js) do %>
-              <%= javascript_tag do %>
-                $(document).ready(function() {
-                  <!-- Create a map object and specify the DOM element for display -->
-                  var map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: <%= @institution.latitude %>, lng: <%= @institution.longitude %>},
-                    scrollwheel: false,
-                    zoom: 10
-                  });
-                })
-              <% end %>
-            <% end %>
-          <!-- end of map -->
+      <div class="col-xs-12 col-md-8">
+        <div class="card-intitution-name">
+          <h2><%= @institution.name %></h2>
+        </div>
+        <hr>
+
+        <div class="text-center" id="title">
+          <% if @trials.size == 1 %>
+            <h4>Essa instituição encontra-se à <strong><%= params[:distance] %> km</strong> de você e conduz <strong>1</strong> pesquisa que oferece tratamento para <strong><%= @condition %></strong></h4>
+          <% else %>
+            <h4>Essa instituição encontra-se à <strong><%= params[:distance] %> km</strong> de você e conduz <strong><%= @trials.size %></strong> pesquisas que oferecem tratamento para <strong><%= @condition %></strong></h4>
+          <% end %>
         </div>
       </div>
-      <div class="col-md-12">
-        <div id="title">
-          <h4 class="text-center"><%= @institution.address. gsub(', ,',', ') %></h4>
-        </div>
+
+      <div class="col-xs-12 col-md-4">
+        <!-- beggining of map -->
+        <div id="map"></div>
+        <!-- Gmaps js: building the map -->
+          <% content_for(:after_js) do %>
+            <%= javascript_tag do %>
+              $(document).ready(function() {
+                <!-- Create a map object and specify the DOM element for display -->
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  center: {lat: <%= @institution.latitude %>, lng: <%= @institution.longitude %>},
+                  scrollwheel: false,
+                  zoom: 10
+                });
+              })
+            <% end %>
+          <% end %>
+        <!-- end of map -->
+        <p>endereço: <%= @institution.address.gsub(", ,",", ") %></p>
       </div>
     </div>
-  </div>
+
 
   <% @trials.each_with_index do |trial, index| %>
     <div class="card">
       <div class="row">
-        <div class="title-research">
-
+        <div class="col-xs-12 col-md-2">
           <h3><strong>Nº<%= index + 1%></strong></h3>
-          <h3><%= trial.title %></h3>
+        </div>
+
+        <div class="col-xs-12 col-md-8">
+          <div class="title-research">
+            <h3><%= trial.title %></h3>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-md-2">
           <!-- button to show alert on screen -->
           <button data-toggle="modal" data-target="#awareness" class="btn btn-primary">Quero Candidatar</button>
         </div>
       </div>
       <hr>
-        <div class="text-center col-xs-12 col-md-6 col-md-offset-6">
-            <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "https://www.clinicaltrials.gov/ct2/show/#{trial.trial_nct_id}", target: "_blank" %>
-          </div>
-
-        <div class="">
-          <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
-          <p><%= trial.description %></p>
-
+      <div class="text-center col-xs-12 col-md-6 col-md-offset-6">
+          <%= link_to "Visitar a webpage do estudo com informações detalhadas em Inglês", "https://www.clinicaltrials.gov/ct2/show/#{trial.trial_nct_id}", target: "_blank" %>
         </div>
 
-        <div class="">
-          <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
-          <p><%= trial.eligibility %></p>
-        </div>
+      <div class="">
+        <h4><strong><%= "Descrição da Pesquisa:" %></strong></h4>
+        <p><%= trial.description %></p>
 
-        <div class="">
-          <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
-          <% @array = [] %>
-          <% trial.doctors.each do |doctor| %>
-          <% @array << doctor.name %>
-          <% end %>
-          <p><%= @array.join ", " %></p>
+      </div>
 
-        </div>
+      <div class="">
+        <h4><strong><%= "Critérios de elegibilidade:" %></strong></h4>
+        <p>São aceitos como voluntários  as seguintes pessoas</p>
+        <p>Gêneros: <%= trial.eligibility.split(",")[0] %></p>
+        <p>Idade mínima: <%= trial.eligibility.split(",")[1] %></p>
+        <p>Idade máxima: <%= trial.eligibility.split(",")[2] %></p>
+      </div>
 
+      <div class="">
+        <h4><strong><%= "Médicos Responsáveis:" %></strong></h4>
+        <% @array = [] %>
+        <% trial.doctors.each do |doctor| %>
+        <% @array << doctor.name %>
+        <% end %>
+        <p><%= @array.join ", " %></p>
 
+      </div>
     </div>
-
   <% end %>
-</div>
+</div>s

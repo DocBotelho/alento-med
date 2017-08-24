@@ -64,6 +64,7 @@ class Syncer
       institution.institutioncontacts = []
       institution.save!
       trial.institutions << institution unless trial.institutions.include?(institution)
+      puts "Institution added to trials"
     end
 
 
@@ -98,6 +99,17 @@ class Syncer
       doctor.save!
       trial.doctors << doctor unless trial.doctors.include?(doctor)
       puts "Doctor added to trials"
+      end
+    end
+
+    Study.joins("INNER JOIN sponsors on sponsors.nct_id = studies.nct_id INNER JOIN facilities on facilities.nct_id = studies.nct_id").where(WHERE).select("sponsors.nct_id as sponsors_nct_id, sponsors.name as sponsors_name, sponsors.lead_or_collaborator as sponsors_lead").each do |sponsor|
+      if trial = Trial.find_by(trial_nct_id: sponsor.sponsors_nct_id)
+        trial.sponsor = sponsor.sponsors_name if sponsor.sponsors_lead == "lead"
+        trial.institutions.where(name: nil).update(name: sponsor.sponsors_name)
+        trial.institutions.where(name: "Local Institution").update(name: sponsor.sponsors_name)
+        trial.institutions.where(name: "Research Site").update(name: sponsor.sponsors_name)
+        trial.save
+        puts "Added sponsor to institution"
       end
     end
   end
