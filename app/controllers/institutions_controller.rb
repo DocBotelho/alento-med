@@ -9,8 +9,13 @@ class InstitutionsController < ApplicationController
 
     #add search on table disease to find trial.condition when given a disease in Portuguese
     @user_condition = params[:condition]
-    diseases = Disease.search_by_portuguese(@user_condition)
-    @condition = diseases.first.english
+    disease = Disease.find_by(portuguese: @user_condition)
+
+    if disease.nil?
+      @condition = ""
+    else
+      @condition = disease.english
+    end
 
     @institutions = Institution.near(location, range).condition_search(@condition).where.not(latitude: nil, longitude: nil)
     @institutions_paginate = @institutions.page(params[:page])
