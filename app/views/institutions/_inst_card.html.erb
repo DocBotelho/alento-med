@@ -1,0 +1,15 @@
+<div class="card-index map col-xs-12 col-lg-4">
+  <br>
+  <p>
+    <%= institution.name %> <strong>está a somente <%= distance = institution.distance.round(1) %> km</strong> de você
+    <% institution_conditions = [] %>
+    <% institution.trials.search_by_condition(condition).each do |trial| %>
+      <% trial.condition.each do |condition| %>
+        <% institution_conditions << condition %>
+      <% end %>
+    <% end %>
+    e oferece tratamentos para <%= institution_conditions.join(", ") %>
+  </p>
+
+  <%= link_to "Saiba mais", institution_path(institution, condition: condition, distance: distance), class: "btn btn-primary saiba-mais" %>
+</div>

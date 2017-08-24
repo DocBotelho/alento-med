@@ -15,6 +15,7 @@ class InstitutionsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@institutions) do |institution, marker|
       marker.lat institution.latitude
       marker.lng institution.longitude
+      marker.infowindow render_to_string(partial: "/institutions/inst_card", locals: {institution: institution, condition: @condition})
     end
   end
 
