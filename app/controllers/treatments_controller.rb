@@ -8,7 +8,7 @@ class TreatmentsController < ApplicationController
   @treatment = Treatment.new(treatment_params)
   @treatment.user = current_user
   @treatment.save!
-    if user_current.email == ""
+    if current_user.email == ""
       redirect_to edit_user_path(current_user)
     else
       redirect_to treatments_path
