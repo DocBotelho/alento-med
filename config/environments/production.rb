@@ -1,9 +1,10 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_mailer.delivery_method     = :postmark
-  config.action_mailer.postmark_settings   = { api_key: ENV['POSTMARK_API_KEY'] }
-  config.action_mailer.default_url_options = { host: "alento-med-docbotelho.herokuapp.com" }
+  config.action_mailer.delivery_method     = :smtp
+  config.action_mailer.smtp_settings   = { address: 'smtp.sendgrid.ne
+', port: 465, user_name: 'apikey', password: ENV['SENDGRID_API_KEY'] }
+  config.action_mailer.default_url_options = { host: "www.alentomed.com.br" }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
