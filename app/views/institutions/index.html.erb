@@ -36,11 +36,20 @@
               <div class="card-index col-xs-12 col-lg-4">
                 <br>
                 <p><%=institution.name%> está a somente
+<<<<<<< HEAD
                 <% @distance = institution.distance * 100 %>
                 <% if @distance < 1 %>
                   <strong><%= @distance = @distance.round %> km</strong> de você
                 <% else %>
                   <strong><%= @distance = (@distance / 100).round %> km</strong> de você
+=======
+                <% if institution.distance < 1 %>
+                  <strong><%= @distance = institution.distance * 100 %>
+                  m</strong> de você
+                <% else %>
+                  <%= @distance = institution.distance.round %>
+                  km</strong> de você
+>>>>>>> 90346588684ae40f7e730734a3973780496a2bdb
                 <% end %>
 
                 <% @institution_conditions = [] %>
