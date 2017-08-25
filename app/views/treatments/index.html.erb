@@ -22,17 +22,37 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<div class="container">
-<h1>Pagina do usuario</h1>
 
-<h4>Você se candidatou aos seguintes estudos</h4>
+<div class="container user-area">
 
-<p>1) "Prospective Analysis of Robot-Assisted Surgery" no centro clínico Instituto do Câncer de São Paulo - ICESP em 23 de agosto de 2017</p>
+  <h1 class="text-center">Central de Informações do Usuário</h1>
 
-<p>1) "Impact of Polymorphisms of OCT2 and OCTN1 on the Kinetic Disposition of Gabapentin in Patients Undergoing Chronic Use" no centro clínico Universidade Estadual Paulista Júlio de Mesquita Filho em 23 de agosto de 2017</p>
+  <%= link_to "Retornar à busca", institutions_path, class:"btn btn-primary" %>
 
-</div><!-- EMPTY# by @DocBotelho -->
+  <hr>
+  <h4>Seja bem-vindo, <strong><%= current_user.first_name %> </strong>!</h4>
+  <h4>Até a data atual, ALENTO conectou você aos seguintes estudos clínicos</h4>
+  <br>
 
+  <% @treatments.each_with_index do |treatment, index| %>
+    <ul>
+      <li>
+        <p>Data de candidatura: <%= treatment.created_at %></p>
+      </li>
+      <li>
+        <p>Tratamento no: <%= index +1 %> : <%= treatment.trial.title %></p>
+      </li>
+      <li>
+        <p>Centro clínico responsável: <%= treatment.institution.name %></p>
+      </li>
+      <li>
+        <p><%= link_to "Informações Detalhadas em Inglês: #{treatment.trial.trial_nct_id}", "https://www.clinicaltrials.gov/ct2/show/#{treatment.trial.trial_nct_id}", target: "blank" %></p>
+      </li>
+    </ul>
+    <br>
+    <hr>
+  <% end %>
+</div>
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>

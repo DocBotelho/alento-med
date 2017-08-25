@@ -1,8 +1,8 @@
 class TreatmentsController < ApplicationController
 
-  def new
-    @treatment = Treatment.new()
-  end
+  # def new
+  #   @treatment = Treatment.new()
+  # end
 
   def create
   @treatment = Treatment.new(treatment_params)
