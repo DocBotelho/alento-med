@@ -1,0 +1,6 @@
+WATSON commands
+
+response = HTTParty.get("https://gateway.watsonplatform.net/language-translator/api/v2/translate?source=en&target=pt&text=hello", basic_auth: { username: "", password: "" })
+
+response.body
+
