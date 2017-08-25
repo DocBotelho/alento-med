@@ -1,15 +1,17 @@
 <div class="pop-up">
   <br>
   <p>
-    <%= institution.name %> <strong>está a somente <%= distance = institution.distance.round %> km</strong> de você
-    <% institution_conditions = [] %>
-    <% institution.trials.search_by_condition(condition).each do |trial| %>
+    <%= institution.name %> está a somente <strong><%= distance = institution.distance.round %> km</strong> de você
+    <% @institution_conditions = [] %>
+    <% institution.trials.search_by_condition(@condition).each do |trial| %>
       <% trial.condition.each do |condition| %>
-        <% institution_conditions << condition %>
+        <% condition = Disease.find_by(english: condition) %>
+        <% @institution_conditions << condition.portuguese %>
       <% end %>
     <% end %>
-    e oferece tratamentos para <%= institution_conditions.join(", ") %>
+    e oferece tratamentos para <strong><%= @institution_conditions.join(", ") %></strong>
   </p>
 
-  <%= link_to "Saiba mais", institution_path(institution, condition: condition, distance: distance), class: "btn btn-primary saiba-mais" %>
+  <%= link_to "Saiba mais", institution_path(institution, condition: @user_condition, distance: @distance), class: "btn btn-primary saiba-mais" %>
 </div>
+

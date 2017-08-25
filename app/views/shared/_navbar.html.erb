@@ -35,6 +35,11 @@
                 <% end %>
               </li>
               <li>
+                <%= link_to treatments_path do %>
+                  <i class="fa fa-heartbeat"></i>  <%= t(".profile", default: "Meus Tratamentos") %>
+                <% end %>
+              </li>
+              <li>
                 <%= link_to edit_user_registration_path do %>
                   <i class="fa fa-user"></i>  <%= t(".profile", default: "Meu perfil") %>
                 <% end %>

@@ -1,4 +1,16 @@
-<!-- MOVED BY VIEW INSTITUTIONS SHOW by DocBotelho  -->
+<div class="row text-center">
+  <!-- code to add Traslation button from Google -->
+  <div id="google_translate_element">
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'pt', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+      }
+
+    </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  </div>
+<!-- end of code to add Traslation button from Google -->
+</div>
+
 <!-- Email Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="modal_treatment">
   <div class="modal-dialog" role="document">
@@ -27,17 +39,17 @@
 
   <h1 class="text-center">Central de Informações do Usuário</h1>
 
-  <%= link_to "Retornar à busca", institutions_path, class:"btn btn-primary" %>
+  <%= link_to "Retornar à busca", institutions_path(condition: ""), class:"btn btn-primary" %>
 
   <hr>
   <h4>Seja bem-vindo, <strong><%= current_user.first_name %> </strong>!</h4>
   <h4>Até a data atual, ALENTO conectou você aos seguintes estudos clínicos</h4>
   <br>
 
-  <% @treatments.each_with_index do |treatment, index| %>
+  <% @treatments.reverse.each_with_index do |treatment, index| %>
     <ul>
       <li>
-        <p>Data de candidatura: <%= treatment.created_at %></p>
+        <p>Data de candidatura: <%= treatment.created_at.strftime("%d/%m/%Y") %></p>
       </li>
       <li>
         <p>Tratamento no: <%= index +1 %> : <%= treatment.trial.title %></p>
