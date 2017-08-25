@@ -8,14 +8,7 @@ class InstitutionsController < ApplicationController
     range = 10000
 
     #add search on table disease to find trial.condition when given a disease in Portuguese
-    @user_condition = params[:condition]
-    disease = Disease.find_by(portuguese: @user_condition)
-
-    if disease.nil?
-      @condition = ""
-    else
-      @condition = disease.english
-    end
+    @condition = user_condition(params[:condition])
 
     @institutions = Institution.near(location, range).condition_search(@condition).where.not(latitude: nil, longitude: nil)
     @institutions_paginate = @institutions.page(params[:page])
@@ -33,13 +26,24 @@ class InstitutionsController < ApplicationController
 
   def show
     @institution = Institution.find(params[:id])
-    @condition = params[:condition]
+    @condition = user_condition(params[:condition])
     @trials = @institution.trials.search_by_condition(@condition)
     @treatment = Treatment.new
     @treatment.institution = @institution
   end
 
   private
+
+  def user_condition(disease)
+    @user_condition = disease.downcase
+    disease = Disease.find_by(portuguese: @user_condition)
+
+    if disease.nil?
+      @condition = ""
+    else
+      @condition = disease.english
+    end
+  end
 
   def user_location
     return request.location unless Rails.env.development?

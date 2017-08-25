@@ -46,7 +46,7 @@
                 <% end %>
                 e oferece tratamentos para <strong><%= @institution_conditions.join(", ") %></strong></p>
 
-                <%= link_to "Saiba mais", institution_path(institution, condition: @condition, distance: @distance), class: "btn btn-primary saiba-mais" %>
+                <%= link_to "Saiba mais", institution_path(institution, condition: @user_condition, distance: @distance), class: "btn btn-primary saiba-mais" %>
               </div>
             <% end %>
           <% end %>
