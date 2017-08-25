@@ -35,7 +35,14 @@
             <% @institutions_paginate.each do |institution| %>
               <div class="card-index col-xs-12 col-lg-4">
                 <br>
-                <p><%=institution.name%> <strong>está a somente <%= @distance = institution.distance.round %> km</strong> de você
+                <p><%=institution.name%> está a somente
+                <% if institution.distance < 1 %>
+                  <strong><%= @distance = institution.distance * 100 %>
+                  m</strong> de você
+                <% else %>
+                  <%= @distance = institution.distance.round %>
+                  km</strong> de você
+                <% end %>
 
                 <% @institution_conditions = [] %>
                 <% institution.trials.search_by_condition(@condition).each do |trial| %>
