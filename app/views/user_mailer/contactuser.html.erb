@@ -1,4 +1,4 @@
-<p>Olá <%= @user.name %>,</p>
+<p>Olá <%= @user.first_name %>,</p>
 <p>Obrigado pelo seu interesse em utilizar nossa plataforma para participar do tratamento: <%= @treatment.trial.title %>.</p>
 <p>Nós enviamos as seguintes informações de contato para a instituição responsável pelo estudo cientifico que conduzirá o tratamento: Nome: <%= @user.first_name + " " + @user.last_name %> , Email: <%= @user.email %>, Telefone: <%= @user.phone %>. A partir de agora, você pode aguardar o contato da instituição para prosseguir com os procedimentos. Se houver algum erro nos seus dados fornecidos, por favor corrija as informações em seu cadastro clicando na sua foto de perfil no canto superior direito e em seguida editar cadastro. Após isso, candidate-se no estudo novamente ou entre em contato através das informações abaixo.</p>
 <p>Nome da instituição: <%= @treatment.institution.name %></p>
