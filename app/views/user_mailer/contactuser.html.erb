@@ -4,8 +4,13 @@
 <p>Nome da instituição: <%= @treatment.institution.name %></p>
 <p>Endereço: <%= @treatment.institution.address %></p>
 <p>Médicos(as) responsáveis: <%= @treatment.trial.doctors.pluck(:name) %></p>
-<p>Email(s) para contato: <%= %></p>
-<p>Número de telefone para contato:<%= %></p>
+<% if  @treatment.institution.institutioncontacts[0]["email"].nil?%>
+  <% contact = @treatment.trial.centralcontacts[0] %>
+<%else %>
+  <% contact = @treatment.institution.institutioncontacts[0] %></p>
+<%end%>
+<p>Email para contato: <%= contact["email"] %></p>
+<p>Número de telefone para contato:<%= contact["phone"] %></p>
 <p>Identificador NCT: <%= @treatment.trial.trial_nct_id %></p>
 <p> "Lembre-se que cada estudo tem critérios de seleção especificos dos seus participantes e a Alento não participa do processo de seleção dos pacientes a serem tratados pelo estudo. Consulte mais detalhes em nossa página e nos links fornecidos, ou entre diretamente em contato com os responsáveis pelo estudo ou conosco através do email contato@alentomed.com.br para mais informações."</p>
 <p>Agradecemos a sua visita e lhe desejamos muita saúde.</p>
