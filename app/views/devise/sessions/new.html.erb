@@ -21,7 +21,7 @@
                 <div class="text-center"><%- if devise_mapping.omniauthable? %>
                 <%- resource_class.omniauth_providers.each do |provider| %>
                 <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn btn-xs btn-block btn-social btn-facebook' do %>
-                <span class=""></span>Entrar com <%= OmniAuth::Utils.camelize(provider)%>
+                Entrar com <%= OmniAuth::Utils.camelize(provider)%>
                 <%end%>
                     <!-- <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
                   <% end -%>
