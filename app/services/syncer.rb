@@ -32,9 +32,9 @@ class Syncer
       end
     end
 
-    Study.joins("INNER JOIN design_groups on design_groups.nct_id = studies.nct_id INNER JOIN facilities on facilities.nct_id = studies.nct_id").where(WHERE).select("design_groups.description as description, design_groups.nct_id as design_nct_id").each do |design|
-      trial = Trial.find_by(trial_nct_id: design.design_nct_id)
-      trial.description = design.description
+    Study.joins("INNER JOIN detailed_descriptions on detailed_descriptions.nct_id = studies.nct_id INNER JOIN facilities on facilities.nct_id = studies.nct_id").where(WHERE).select("detailed_descriptions.description as description, detailed_descriptions.nct_id as description_nct_id").each do |desc|
+      trial = Trial.find_by(trial_nct_id: desc.description_nct_id)
+      trial.description = desc.description
       trial.save!
       puts "Added description to trial"
     end

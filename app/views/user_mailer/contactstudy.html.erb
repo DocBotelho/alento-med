@@ -1,10 +1,10 @@
-<p><%= @greeting %></p>
-<p><%= @briefintro %></p>
-<p><%= @intro %></p>
-<p><%= @username %></p>
-<p><%= @useremail %></p>
-<p><%= @userphone %></p>
-<p><%= @reminder %></p>
-<p><%= @ending %></p>
-<p><%= @att %></p>
-<p><%= @alentoteam %></p>
+<p>Olá <%="#{@studycontact.name}"%></p>
+<p>Nós somos a Alento. Uma plataforma que visa conectar usuários com tratamentos conduzidos por pesquisas clinicas. Você pode checar nossa plataforma através do site: www.alentomed.com.br.</p>
+<p>Um usuário utilizou a nossa plataforma para expressar que tem interesse em participar do seu estudo cientifico #{@trial.title} com identificador #{@trial.trial_nct_id}. Abaixo constam as informações do usuário para que possa ser dado prosseguimento nas etapas de aceitação do paciente. Enviamos também um email para o usuário com as seguintes informações de contato: email: #{@studycontact.email}, telefone: #{@studycontact.phone}. Seguem as informações do usuário abaixo:</p>
+<p>Nome: <%="#{@user.name}"%></p>
+<p>Email do usuário: <%="#{@user.email}"%></p>
+<p>Telefone p/ contato: <%="#{@user.phone}"%></p>
+<p>Todas as nossas informações são obtidas através do banco de dados do site clinicaltrials.gov , caso haja alguma inconsistência nas iformações por favor entre em contato através do email contato@alentomed.com.br ou entre em contato com a equipe Clinical Trials.</p>
+<p>Parabéns pelo seu trabalho.</p>
+<p>Atenciosamente,</p>
+<p>Equipe Alento</p>
