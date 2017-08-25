@@ -1,16 +1,16 @@
-<p>Olá <%= @user.name %>,</p>
+<p>Olá <%= @user.first.name %>,</p>
 <p>Obrigado pelo seu interesse em utilizar nossa plataforma para participar do tratamento: <%= @treatment.trial.title %>.</p>
-<p>Nós enviamos as seguintes informações de contato para a instituição responsável pelo estudo cientifico que conduzirá o tratamento: Nome: <%= @user.name %>, Email: <%= @user.email %> e Telefone: <%= @user.phone %> A partir de agora, você pode aguardar o contato da instituição para prosseguir com os procedimentos. Se houver algum erro nos seus dados fornecidos, por favor corrija as informações em seu cadastro clicando na sua foto de perfil no canto superior direito e em seguida editar cadastro. Após isso, candidate-se no estudo novamente ou entre em contato através das informações abaixo.</p>
+<p>Nós enviamos as seguintes informações de contato para a instituição responsável pelo estudo cientifico que conduzirá o tratamento: Nome: <%= @user.first.name " " @user.last.name %> , Email: <%= @user.email %>, Telefone: <%= @user.phone %>. A partir de agora, você pode aguardar o contato da instituição para prosseguir com os procedimentos. Se houver algum erro nos seus dados fornecidos, por favor corrija as informações em seu cadastro clicando na sua foto de perfil no canto superior direito e em seguida editar cadastro. Após isso, candidate-se no estudo novamente ou entre em contato através das informações abaixo.</p>
 <p>Nome da instituição: <%= @treatment.institution.name %></p>
 <p>Endereço: <%= @treatment.institution.address %></p>
-<p>Médicos(as) responsáveis: <%= @treatment.trial.doctors.pluck(:name) %></p>
+<p>Médico(a) responsável: <%= @treatment.trial.doctors[0]"name"] %></p>
 <% if  @treatment.institution.institutioncontacts[0]["email"].nil?%>
   <% contact = @treatment.trial.centralcontacts[0] %>
 <%else %>
   <% contact = @treatment.institution.institutioncontacts[0] %></p>
 <%end%>
 <p>Email para contato: <%= contact["email"] %></p>
-<p>Número de telefone para contato:<%= contact["phone"] %></p>
+<p>Número de telefone para contato: <%= contact["phone"] %></p>
 <p>Identificador NCT: <%= @treatment.trial.trial_nct_id %></p>
 <p> "Lembre-se que cada estudo tem critérios de seleção especificos dos seus participantes e a Alento não participa do processo de seleção dos pacientes a serem tratados pelo estudo. Consulte mais detalhes em nossa página e nos links fornecidos, ou entre diretamente em contato com os responsáveis pelo estudo ou conosco através do email contato@alentomed.com.br para mais informações."</p>
 <p>Agradecemos a sua visita e lhe desejamos muita saúde.</p>
