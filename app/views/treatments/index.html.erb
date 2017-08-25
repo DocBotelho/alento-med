@@ -11,29 +11,32 @@
 <!-- end of code to add Traslation button from Google -->
 </div>
 
-<!-- Email Modal -->
-<div class="modal fade" tabindex="-1" role="dialog" id="modal_treatment">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Pronto! Verifique seu email.</h4>
-      </div>
-      <div class="modal-body">
-        <p>
-          Os médicos responsáveis pela pesquisa foram comunicados de sua candidatura ao tratamento.
-          Em breve, você será contactado para dar prosseguimento ao processo de recrutamento.
+<!-- added if to hide modal when checking treatments from navbar dropdown menu -->
+<% if params[:modal].nil? %>
+  <!-- Email Modal -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="modal_treatment">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Pronto! Verifique seu email.</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            Os médicos responsáveis pela pesquisa foram comunicados de sua candidatura ao tratamento.
+            Em breve, você será contactado para dar prosseguimento ao processo de recrutamento.
 
-          Caso deseje, você também pode se antecipar e entrar em contato com a instituição por meio das informações que lhe enviamos por email. Boa sorte!
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">sair</button>
+            Caso deseje, você também pode se antecipar e entrar em contato com a instituição por meio das informações que lhe enviamos por email. Boa sorte!
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">sair</button>
 
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+<% end %>
 
 <div class="container user-area">
 
