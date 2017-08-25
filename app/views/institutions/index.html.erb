@@ -37,8 +37,6 @@
                 <br>
                 <p><%=institution.name%> está a somente
 
-                <% end %>
-
                 <% @institution_conditions = [] %>
                 <% institution.trials.search_by_condition(@condition).each do |trial| %>
                   <% trial.condition.each do |condition| %>
