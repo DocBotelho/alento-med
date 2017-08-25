@@ -8,8 +8,10 @@ class UserMailer < ApplicationMailer
 
   def contactuser(treatment)
     @user = treatment.user
+    @treatment = treatment
 
-    # COMMENTED TO MAKE IT RUN with TA's, MARCOS, ASSISTANCE
+
+    # REMOVED/COMMENTED TO MAKE IT RUN By DocBotelho & Marcos TA
     # @contactemail = #{
     #   unless treatment.institution.institutioncontacts[0][:email].nil?
     #     treatment.institution.institutioncontacts[0][:email]
@@ -24,6 +26,8 @@ class UserMailer < ApplicationMailer
     #     treatment.trial.centralcontacts[0][:phone]
     #   end
     #   }"
+
+
     mail(to: @user.email, subject: "Informações sobre o tratamento: #{treatment.trial.title}")
   end
 
