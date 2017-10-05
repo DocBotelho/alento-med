@@ -46,7 +46,7 @@ class InstitutionsController < ApplicationController
   end
 
   def user_location
-    # return request.location unless Rails.env.development?
+    return request.location unless Rails.env.development?
     Struct.new(:latitude, :longitude).new(-23.5711274, -46.652232)
   end
 end
