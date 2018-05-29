@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
   get 'sobrenos', to: 'pages#sobrenos'
+  get 'privacypolicies', to: 'pages#privacypolicies'
   root to: 'pages#home'
   resources :treatments, only: [:create, :index]
   resources :institutions, only: [:index, :show]
